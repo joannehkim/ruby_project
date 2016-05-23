@@ -1,14 +1,5 @@
 source 'https://rubygems.org'
 
-resources :users
-resources :sessions
-resources :trips
-resources :places
-resources :costs
-resources :pictures
-resources :comments
-resources :likes
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
