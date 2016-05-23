@@ -29,7 +29,7 @@ gem 'rails-footnotes', '>= 4.0.0', '<5'
 
 gem 'sprockets-rails', '~> 3.0.4'
 gem 'materialize-sass'
-
+gem "paperclip", "~> 4.2"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
