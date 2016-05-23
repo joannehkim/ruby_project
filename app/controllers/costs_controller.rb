@@ -6,6 +6,8 @@ class CostsController < ApplicationController
   end
 
   def create
+    Cost.create(cost_params)
+    redirect_to :back
   end
 
   def show
@@ -18,5 +20,10 @@ class CostsController < ApplicationController
   end
 
   def destroy
+  end
+
+private
+  def cost_params
+  params.require(:cost).permit(:category, :place_id, :cost, :company, :description)
   end
 end
