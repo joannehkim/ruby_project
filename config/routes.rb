@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'likes/index'
+
+  get 'likes/new'
+
+  get 'likes/create'
+
+  get 'likes/show'
+
+  get 'likes/edit'
+
+  get 'likes/update'
+
+  get 'likes/destroy'
+
   resources :users
   resources :sessions
 
