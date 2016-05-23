@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   end
 
   def create
+
+
+  	fail
   end
 
   def show

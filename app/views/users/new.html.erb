@@ -1,2 +1,16 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div id="container">
+<h1>Sign Up</h1>
+
+<form action='/users' method='POST'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>First Name: <input type="text" name="user[first_name]"></label></p>
+	<label>Last Name: <input type="text" name="user[last_name]"></label></p>
+	<label>Email: <input type="text" name="user[email]"></label></p>
+	<label>Password <input type="password" name="user[password]"></label></p>
+	<label>Confirm Password: <input type="password" name="user[password_confirmation]"></label></p>
+	<input type="submit" value="Sign Up"></p>
+</form>
+
+
+
+</div>
