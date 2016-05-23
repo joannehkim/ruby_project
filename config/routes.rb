@@ -1,4 +1,74 @@
 Rails.application.routes.draw do
+  get 'comments/index'
+
+  get 'comments/new'
+
+  get 'comments/create'
+
+  get 'comments/show'
+
+  get 'comments/edit'
+
+  get 'comments/update'
+
+  get 'comments/destroy'
+
+  get 'pictures/index'
+
+  get 'pictures/new'
+
+  get 'pictures/create'
+
+  get 'pictures/show'
+
+  get 'pictures/edit'
+
+  get 'pictures/update'
+
+  get 'pictures/destroy'
+
+  get 'costs/index'
+
+  get 'costs/new'
+
+  get 'costs/create'
+
+  get 'costs/show'
+
+  get 'costs/edit'
+
+  get 'costs/update'
+
+  get 'costs/destroy'
+
+  get 'places/index'
+
+  get 'places/new'
+
+  get 'places/create'
+
+  get 'places/show'
+
+  get 'places/edit'
+
+  get 'places/update'
+
+  get 'places/destroy'
+
+  get 'trips/index'
+
+  get 'trips/new'
+
+  get 'trips/create'
+
+  get 'trips/show'
+
+  get 'trips/edit'
+
+  get 'trips/update'
+
+  get 'trips/destroy'
+
   get 'sessions/index'
 
   get 'sessions/new'
