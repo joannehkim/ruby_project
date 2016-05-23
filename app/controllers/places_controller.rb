@@ -6,6 +6,8 @@ class PlacesController < ApplicationController
   end
 
   def create
+    Place.create(place_params)
+    redirect_to :back
   end
 
   def show
@@ -18,5 +20,10 @@ class PlacesController < ApplicationController
   end
 
   def destroy
+  end
+
+private
+  def place_params
+  params.require(:place).permit(:location, :trip_id, :description, :datetime)
   end
 end
