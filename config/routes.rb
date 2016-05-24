@@ -5,39 +5,6 @@ Rails.application.routes.draw do
 
   resources :sessions
   resources :users
-
-
-  # get 'sessions/index'
-
-  # get 'sessions/new'
-
-  # get 'sessions/create'
-
-  # get 'sessions/destroy'
-
-  # get 'users/index'
-
-  # get 'users/new'
-
-  # get 'users/create'
-
-  # get 'users/show'
-
-  get 'likes/index'
-
-  get 'likes/new'
-
-  get 'likes/create'
-
-  get 'likes/show'
-
-  get 'likes/edit'
-
-  get 'likes/update'
-
-  get 'likes/destroy'
-
-
   resources :users
   resources :sessions
   resources :trips

@@ -6,11 +6,6 @@ class UsersController < ApplicationController
   end
 
   def create
-<<<<<<< HEAD
-    
-=======
-    # fail
->>>>>>> e6789f7b6b7faf25af0309b282ac8361051f5058
   	@user = User.new (user_params)
   	if @user.save
   		session[:user_id] = @user.id
