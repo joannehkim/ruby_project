@@ -2,6 +2,10 @@
 <html>
 <head>
 	<title></title>
+
+
+
+
 </head>
 
 <body>
@@ -9,8 +13,35 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Compass</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/sessions/create">Sign Up</a></li>
-        <li><a href="collapsible.html">Log In</a></li>
+        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-target="#modal1">Sign Up</a>
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h1>Sign Up</h1>
+              <form action='/users' method='POST'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input id="icon_prefix" placeholder="First name" type="text" name="user[first_name]"></p>
+                <input placeholder="Last name" type="text" name="user[last_name]"></p>
+                <input placeholder="Email" type="text" name="user[email]"></p>
+                <input placeholder="Password" type="password" name="user[password]"></label></p>
+                <input placeholder="Confirm Password" type="password" name="user[password_confirmation]"></p>
+                <input type="submit" value="Sign Up"></p>
+              </form>
+            </div>
+          </div>
+        </li>
+        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2" data-target="#modal2">Login</a>
+          <div id="modal2" class="modal">
+            <div class="modal-content">
+              <h1>Login</h1>
+              <form action='/sessions' method='POST'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <label>Email: <input type="text" name="email"></label></p>
+                <label>Password <input type="text" name="password"></label></p>
+                <input type="submit" value="Login">
+              </form>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   </nav>
