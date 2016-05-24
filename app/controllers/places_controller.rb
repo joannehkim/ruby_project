@@ -6,17 +6,30 @@ class PlacesController < ApplicationController
   end
 
   def create
-    Place.create(place_params)
-    redirect_to :back
+    @place = Place.new(place_params)
+    if @place.save
+      redirect_to :back
+    else
+      flash[:errors] = @place.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def show
+    @place = Place.find(params[:id])
   end
 
   def edit
   end
 
   def update
+    @place = Place.find(params[:id])
+    if @place.update(trip_params)
+      redirect_to "/place/#{@place.id}"
+    else
+      flash[:errors] = @trip.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def destroy

@@ -1,2 +1,7 @@
-<h1>Costs#new</h1>
-<p>Find me in app/views/costs/new.html.erb</p>
+<form action="/costs" method="POST">
+	<input type="text" name="cost[category]">
+	<input type="hidden" name="cost[place_id]" value="SOME PLACE_ID">
+	<input type="text" name="cost[cost]">
+	<input type="text" name="cost[company]">
+	<input type="text" name="cost[description]">
+</form>
