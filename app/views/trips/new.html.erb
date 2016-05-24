@@ -22,8 +22,10 @@
 
 <form action='/trips' method='POST'>
 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<label>Destination: <input type="text" name="destination"></label></p>
-	<label>Description of your trip: <input type="text" name="description"></label></p>
+	<label>Destination: <input type="text" name="trip[destination]"></label></p>
+	<label>Description of your trip: <input type="text" name="trip[description]"></label></p>
+	<label>Start Date: <input type="date" name="trip[start_date]"></label></p>
+	<label>End Date: <input type="date" name="trip[end_date]"></label></p>
 	<input type="submit" value="Create trip">
 </form>
 

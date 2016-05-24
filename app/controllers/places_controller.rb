@@ -17,6 +17,8 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @picture = Picture.new
+    @pictures = Picture.where(place_id: params[:id])
   end
 
   def edit
