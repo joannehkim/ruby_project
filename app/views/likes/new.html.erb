@@ -1,2 +1,8 @@
 <h1>Likes#new</h1>
 <p>Find me in app/views/likes/new.html.erb</p>
+<form action='/likes' method='POST'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<!-- <input name="likeable_id" value="INSERT OBJECT ID HERE (DEPENDENT ON CONTROLLER)" type="hidden"> -->
+	<!-- <input name="likeable_type" value="INSERT OBJECT TYPE HERE (DEPENDENT ON CONTROLLER)" type="hidden"> -->
+	<input type="submit" value="Like">
+</form>
