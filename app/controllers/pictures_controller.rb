@@ -6,8 +6,13 @@ class PicturesController < ApplicationController
   end
 
   def create
-    Picture.create(picture_params)
-    redirect_to :back
+    @picture = Picture.new(picture_params)
+    if @picture.save
+      redirect_to :back
+    else
+      flash[:errors] = @picture.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def show
@@ -24,6 +29,6 @@ class PicturesController < ApplicationController
 
 private
   def picture_params
-  params.require(:picture).permit(:place_id, :description, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+  params.require(:picture).permit(:place_id, :description, :picture)
   end
 end

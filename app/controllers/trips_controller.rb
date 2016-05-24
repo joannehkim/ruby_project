@@ -8,6 +8,7 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.user_id = current_user.id
     if @trip.save
       redirect_to "/trips/#{@trip.id}"
     else
@@ -18,6 +19,7 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @places = Place.where(trip_id: @trip.id)
   end
 
   def edit
