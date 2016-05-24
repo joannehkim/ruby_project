@@ -1,2 +1,132 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Profile</title>
+	<!-- Compiled and minified CSS -->
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+	<style type="text/css">
+		.row{
+			margin: 40px 10px;
+		}
+		.wrapper{
+			height: 800px;
+		}
+		.trips{
+			text-align: justify;
+		}
+	</style>
+</head>
+<body>
+
+<div id="container">
+
+	<nav class="something">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Compass</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-target="#modal1">Sign Up</a>
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h1>Sign Up</h1>
+              <form action='/users' method='POST'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input id="icon_prefix" placeholder="First name" type="text" name="user[first_name]"></p>
+                <input placeholder="Last name" type="text" name="user[last_name]"></p>
+                <input placeholder="Email" type="text" name="user[email]"></p>
+                <input placeholder="Password" type="password" name="user[password]"></label></p>
+                <input placeholder="Confirm Password" type="password" name="user[password_confirmation]"></p>
+                <input type="submit" value="Sign Up"></p>
+              </form>
+            </div>
+          </div>
+        </li>
+        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2" data-target="#modal2">Login</a>
+          <div id="modal2" class="modal">
+            <div class="modal-content">
+              <h1>Login</h1>
+              <form action='/sessions' method='POST'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <label>Email: <input type="text" name="email"></label></p>
+                <label>Password <input type="text" name="password"></label></p>
+                <input type="submit" value="Login">
+              </form>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="wrapper">
+    <div class="row">
+
+      <div class="col s3">
+        	<img class="square responsive-img" src="/assets/cap.png" alt="profile pic" />
+        	<p>Capt. America</p>
+        	<p>CaptAmerica@test.com</p>
+        	<p>Trips: 100</p>
+        	<p>Favorites: 100</p>
+      </div>
+
+      <div class="col s9">
+    	<h3>Hey, I'm Capt. America!</h3>
+    	<h5>San Diego, California, United States</h5>
+
+    	<div class="trips">
+    	<h4>My Trips</h4>	
+		</div>
+
+
+
+
+      </div>
+
+    </div>
+</div>
+
+
+
+
+
+       <footer class="page-footer">
+         <div class="container">
+           <div class="row">
+             <div class="col l6 s12">
+               <h5 class="white-text">Footer Content</h5>
+               <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+             </div>
+             <div class="col l4 offset-l2 s12">
+               <h5 class="white-text">Links</h5>
+               <ul>
+                 <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                 <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                 <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                 <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <div class="footer-copyright">
+           <div class="container">
+           © 2014 Copyright Text
+           <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+           </div>
+         </div>
+       </footer>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

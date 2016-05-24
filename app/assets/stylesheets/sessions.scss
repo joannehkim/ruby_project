@@ -1,21 +1,19 @@
-#banner {
-	height: 400px;
-	text-align: center;
-	background-color: gray;
-}
-.nav-wrapper {
-	color: black;
-}
-nav ul li {
-	color: black;
+* {
+ margin: 0;
+ padding: 0;
 }
 .row {
-	text-align: center;
+ text-align: center;
 }
-video {
-    display: block;
-    width: 100%;
-    height: 400px;
-    z-index: -100;
-    overflow: none;
+.nav-wrapper {
+ background: none;
+ position: absolute;
+ z-index: 1;
+}
+nav {
+ background: transparent;
+}
+#banner {
+ margin-top: -100px;
+ position: relative;
 }
