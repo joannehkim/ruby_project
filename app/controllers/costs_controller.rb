@@ -6,20 +6,35 @@ class CostsController < ApplicationController
   end
 
   def create
-    Cost.create(cost_params)
-    redirect_to :back
+    @cost = Cost.create(cost_params)
+    if @cost.save
+      redirect_to "/cost/#{@cost.id}"
+    else
+      flash[:errors] = @cost.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def show
+    @cost = Cost.find(params[:id])
   end
 
   def edit
   end
 
   def update
+    @cost = Cost.find(params[:id])
+    if @cost.update(cost_params)
+      redirect_to "/cost/#{@cost.id}"
+    else
+      flash[:errors] = @cost.errors.full_messages
+      redirect_to :back
   end
 
   def destroy
+    @cost = Cost.find(params[:id])
+    if @cost.destroy
+      redirect_to :back
   end
 
 private
