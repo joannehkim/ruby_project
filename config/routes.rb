@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+
+
+  root 'sessions#index'
+
+  resources :sessions
+  resources :users
+
+
+  # get 'sessions/index'
+
+  # get 'sessions/new'
+
+  # get 'sessions/create'
+
+  # get 'sessions/destroy'
+
+  # get 'users/index'
+
+  # get 'users/new'
+
+  # get 'users/create'
+
+  # get 'users/show'
+
   get 'likes/index'
 
   get 'likes/new'
@@ -12,6 +36,7 @@ Rails.application.routes.draw do
   get 'likes/update'
 
   get 'likes/destroy'
+
 
   resources :users
   resources :sessions
