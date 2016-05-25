@@ -4,6 +4,13 @@ class Trip < ActiveRecord::Base
   has_many :likes, :as => :likeable
   has_many :places
 
+  validates :destination, :description, :start_date, :end_date, presence: true
+
+  before_save do
+  	self.destination.capitalize!
+  end
+  	
+
 	def self.most_liked destination
         self.find_by_sql(["SELECT trips.description, trips.id, COUNT(trips.id) as u_likes, users.first_name, trips.start_date, trips.end_date FROM trips JOIN likes ON (trips.id = likes.likeable_id and likes.likeable_type = 'Trip') JOIN users ON users.id = trips.user_id WHERE trips.destination = ? GROUP BY trips.id, users.id ORDER BY u_likes DESC LIMIT 3", destination])
     end
