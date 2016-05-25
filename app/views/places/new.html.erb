@@ -1,2 +1,35 @@
-<h1>Places#new</h1>
-<p>Find me in app/views/places/new.html.erb</p>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Place</title>
+	<!-- Compiled and minified CSS -->
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+	<style type="text/css">
+		.row{
+			margin: 40px 10px;
+		}
+	</style>
+</head>
+<body>
+
+<div id="container">
+	
+<h1>Add Place</h1>
+
+<form action='/places' method='POST'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>Location: <input type="text" name="place[location]"></label></p>
+	<label>Description: <input type="text" name="place[description]"></label></p>
+	<label>Date: <input type="date" name="place[datetime]"></label></p>
+	<input type="hidden" name="place[trip_id]" value="<%= @place.id %>">
+	<input type="submit" value="Add Place">
+</form>
+
+
+
+
+</div>

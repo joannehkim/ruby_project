@@ -67,6 +67,42 @@ img{
 		<div class = 'place_image'><%= image_tag p.picture.url %></div> 
 		<%= p.description %>
 	<% end %>
+
+
+  <div>
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Cost</th>
+        <th>Company</th>
+        <th>Description</th>
+      </trr>
+    <% @costs.each do |c| %>
+      <tr>
+        <td><%= c.category %></td>
+        <td><%= c.cost %></td>
+        <td><%= c.company %></td>
+        <td><%= c.description %></td>
+      </tr>
+    <% end %>
+
+    </table>
+  </div>
+
+  <% if @user_id == current_user.id %>
+  <div>
+    <form action="/costs" method="POST">
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type="text" name="cost[category]" placeholder="Category (hotel, transportation, food, etc.)">
+      <input type="text" name="cost[cost]" placeholder="Cost">
+      <input type="text" name="cost[company]" placeholder="Company (Mariott, Greyhound, Metro)">
+      <input type="text" name="cost[description]" placeholder="Description">
+      <input type="hidden" name="cost[place_id]" value="<%= @place.id %>">
+      <button type="submit" class="btn">Add Cost</button>
+    </form>
+  </div>
+  <% end %>
+
 </div>
 <footer class="page-footer">
           <div class="container">

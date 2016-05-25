@@ -17,8 +17,13 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @user_id = Trip.find_by(id: @place.trip_id).user_id
+    @user = User.find(@user_id)
     @picture = Picture.new
     @pictures = Picture.where(place_id: params[:id])
+    @costs = Cost.where(place_id: params[:id])
+
+
   end
 
   def edit
