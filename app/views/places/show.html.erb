@@ -53,6 +53,22 @@ img{
 			<td>Date:</td>
 			<td><%= @place.datetime %></td>
 		</tr>
+     <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
+    <form action='/likes' method='POST'>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name = "_method" value = 'delete' type = 'hidden'>
+      <input name="likeable_id" value="<%= @place.id %>" type="hidden">
+      <input name="likeable_type" value="Place" type="hidden">
+      <input type="submit" value="Unlike">
+    </form>
+  <% else %>
+    <form action='/likes' method='POST'>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name="likeable_id" value="<%= @place.id %>" type="hidden">
+      <input name="likeable_type" value="Place" type="hidden">
+      <input type="submit" value="Like">
+    </form>
+  <% end %>
 	</table>
 	<%= form_for @picture,  :html => {:multipart => true} do |f| %>
 		<input type = 'hidden' name = 'picture[place_id]' value = "<%= @place.id %>">
@@ -66,6 +82,22 @@ img{
 	<% @pictures.each do |p| %>
 		<div class = 'place_image'><%= image_tag p.picture.url %></div> 
 		<%= p.description %>
+    <% if Like.find_by(user_id: current_user.id, likeable_id: p.id, likeable_type: "Picture") %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name = "_method" value = 'delete' type = 'hidden'>
+          <input name="likeable_id" value="<%= p.id %>" type="hidden">
+          <input name="likeable_type" value= "Picture" type="hidden">
+          <input type="submit" value="Unlike">
+        </form>
+      <% else %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name="likeable_id" value="<%= p.id %>" type="hidden">
+          <input name="likeable_type" value="Trip" type="hidden">
+          <input type="submit" value="Like">
+        </form>
+      <% end %>
 	<% end %>
 
 
@@ -84,6 +116,22 @@ img{
         <td><%= c.company %></td>
         <td><%= c.description %></td>
       </tr>
+       <% if Like.find_by(user_id: current_user.id, likeable_id: c.id, likeable_type: "Cost") %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name = "_method" value = 'delete' type = 'hidden'>
+          <input name="likeable_id" value="<%= c.id %>" type="hidden">
+          <input name="likeable_type" value="Cost" type="hidden">
+          <input type="submit" value="Unlike">
+        </form>
+      <% else %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name="likeable_id" value="<%= c.id %>" type="hidden">
+          <input name="likeable_type" value="Cost" type="hidden">
+          <input type="submit" value="Like">
+        </form>
+      <% end %>
     <% end %>
 
     </table>
