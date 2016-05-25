@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popular</title>
+</head>
+<body>
+	<div class="container">
+	
+	<%= @trip_to.each do |t| %>
+		<%= @trip_owner %><br>
+		<%= t.destination %><br>
+		<%= t.description %><br>
+		<%= t.start_date %><br>
+		<%= t.end_date %><br>
+	<% end %>
+
+
+	</div>
+</body>
+</html>

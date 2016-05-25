@@ -1,6 +1,12 @@
 class TripsController < ApplicationController
   def index
     @trips = Trip.all
+    @trip_at = Trip.where(destination: params[:id])
+  end
+
+  def to_destination
+    @trip_to = Trip.where(destination: params[:id])
+    @trip_owner = User.where(id: @trip_to.first.user_id)
   end
 
   def new

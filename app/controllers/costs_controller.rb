@@ -16,7 +16,7 @@ class CostsController < ApplicationController
   end
 
   def show
-    @costs = Cost.find(params[:id])
+    @cost = Cost.find(params[:id])
   end
 
   def edit

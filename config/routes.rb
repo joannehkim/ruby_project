@@ -5,9 +5,13 @@ Rails.application.routes.draw do
 
   resources :sessions
   resources :users
-  resources :users
   resources :sessions
-  resources :trips
+  resources :trips do
+    member do
+      get 'to_destination'
+    end
+  end
+
   resources :places
   resources :costs
   resources :pictures
