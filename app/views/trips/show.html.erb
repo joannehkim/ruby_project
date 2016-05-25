@@ -114,7 +114,21 @@
 			<td>Date:</td>
 			<td><%= @trip.start_date %> => <%= @trip.end_date %></td>
 		</tr>
+<<<<<<< HEAD
 	</table> -->
+
+	</table>
+	<% if @trip.picture_file_name %>
+	<div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
+	<% end %>
+	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	    <input type = 'hidden' name = '_method' value = 'patch'>
+	     <label for="picture_picture">Picture</label>
+	    <input type="file" name="trip[picture]" id="picture_picture">
+	    <br>
+	    <input type="submit" value="Add Trip Cover Picture">
+	</form>
+
 	<% count = 0 %>
 	<% @places.each do |p| %>
 	<% count += 1 %>
