@@ -85,7 +85,8 @@
       <center>
       <h3>Add a Place:</h3>
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" action="/places" method="POST">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
             <div class="container">
             <div class="row">
               <div class="input-field col s12">
@@ -105,7 +106,7 @@
               </div>
             </div>
             </div>
-            <a class="waves-effect waves-light btn-large"><i class="material-icons right">cloud</i>button</a><br><br>
+            <button type="submit" class="waves-effect waves-light btn-large">Add Place</button>
           </form>
         </div>
 <hr>
