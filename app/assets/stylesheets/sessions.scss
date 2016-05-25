@@ -1,19 +1,69 @@
 * {
  margin: 0;
  padding: 0;
+ font-family: 'Comfortaa', cursive;
+}
+body {
+	background: #fffeef;
 }
 .row {
  text-align: center;
 }
 .nav-wrapper {
  background: none;
- position: absolute;
  z-index: 1;
 }
 nav {
- background: transparent;
+ position: absolute;
+ margin-top: 20px;
+ box-shadow: none;
 }
-#banner {
- margin-top: -100px;
- position: relative;
+#overlay {
+  background-color: rgba(0,0,0,0.5);
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:11;
+}
+#button {
+	text-align: center;
+}
+.btn modal-trigger {
+	color: black;
+}
+.page-footer {
+	background-color: black;
+}
+.modal-backdrop {
+  z-index: -1;
+}
+img:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+img {
+    opacity: 0.8;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+img:visited {
+    opacity: 0.8;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+img:active {
+    opacity: 0.8;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.brand-logo {
+	margin-left: 20px;
+}
+#message {
+	margin-top: 300px;
+	position: relative;
+}
+.logo {
+	margin-top: 250px;
+	font-size: 3em;
+	font-weight: bolder;
 }
