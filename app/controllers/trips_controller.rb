@@ -6,6 +6,7 @@ class TripsController < ApplicationController
 
   def to_destination
     @trips = Trip.most_liked(params[:id])
+    @destination = Trip.find_by(destination: params[:id]).destination
   end
 
   def new
