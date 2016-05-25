@@ -6,10 +6,10 @@
 <body>
 	<div class="container">
 	
-	<%= @trip_to.each do |t| %>
-		<%= @trip_owner %><br>
-		<%= t.destination %><br>
+	<% @trips.each do |t| %>
+		<%= t.first_name %><br>
 		<%= t.description %><br>
+		<%= t.u_likes %><br>
 		<%= t.start_date %><br>
 		<%= t.end_date %><br>
 	<% end %>

@@ -5,8 +5,7 @@ class TripsController < ApplicationController
   end
 
   def to_destination
-    @trip_to = Trip.where(destination: params[:id])
-    @trip_owner = User.where(id: @trip_to.first.user_id)
+    @trips = Trip.most_liked(params[:id])
   end
 
   def new
