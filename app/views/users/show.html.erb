@@ -262,6 +262,11 @@ $titleEls.on('click', function() {
     Likes:
   </p>
 </div>
+
+<% if @user.avatar_file_name %>
+  <div class = 'place_image'><%= image_tag @user.avatar.url  %></div>
+<% end %>
+
 <form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/users/<%= current_user.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
     <input type = 'hidden' name = '_method' value = 'patch'>
      <label for="picture_picture">Picture</label>
