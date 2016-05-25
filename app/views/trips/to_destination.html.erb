@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Popular trips to <%= @destination %></title>
+  <title></title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div class="container">
-	<div>
-		<h1>Popular trips to <%= @destination %></h1>
-	</div>
 
-	<% @trips.each do |t| %>
+<section class="module content">
+  <div class="container">
+    <h1>Popular trips to <%= @destination %></h1>
 
-	  <div class="row">
+      <% @trips.each do |t| %>
+
+    <div class="row">
         <div class="col s12 m7">
           <div class="card">
             <div class="card-image">
@@ -20,18 +23,33 @@
             </div>
             <div class="card-content">
               <p>By <%= t.first_name %></p>
-	      		<%= t.start_date.strftime("%B %d, %Y") %> - <%= t.end_date.strftime("%B %d, %Y") %>            </div>
+            <%= t.start_date.strftime("%B %d, %Y") %> - <%= t.end_date.strftime("%B %d, %Y") %>            </div>
             <div class="card-action">
               <a href="/trips/<%= t.id %>">View Itinerary</a>
-	      		<%= t.u_likes %> Likes
+            <%= t.u_likes %> Likes
             </div>
           </div>
         </div>
       </div>
 
-	<% end %>
+  <% end %>
+<!-- <footer class="page-footer"> -->
+
+  </div>
+</section>
+
+<section class="module parallax parallax-3">
+  <div class="container"><br>
+    <h1><%= @destination %></h1>
+  </div>
+</section>
+
+<!-- <section class="module content">
+  <div class="container">
+
+  </div>
+</section> -->
 
 
-	</div>
 </body>
 </html>

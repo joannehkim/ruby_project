@@ -16,25 +16,6 @@
 </head>
 <body>
 
-  <section class="module parallax parallax-1">
-  <div class="container">
-    <h1>Serene</h1>
-  </div>
-</section>
-
-<section class="module content">
-  <div class="container">
-    <h2></h2>
-    <p></p>
-  </div>
-</section>
-
-<section class="module parallax parallax-2">
-  <div class="container">
-    <h1>Rise</h1>
-  </div>
-</section>
-
 <section class="module content">
   <div class="container">
       <table>
@@ -97,6 +78,8 @@
                 <input id="date" type="date" class="datepicker">
                 <label for="date">Date</label>
               </div>
+
+
             </div>
             </div>
             <a class="waves-effect waves-light btn-large"><i class="material-icons right">cloud</i>button</a><br><br>
@@ -114,7 +97,6 @@
 			<td>Date:</td>
 			<td><%= @trip.start_date %> => <%= @trip.end_date %></td>
 		</tr>
-<<<<<<< HEAD
 	</table> -->
 
 	</table>
@@ -124,9 +106,24 @@
 	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 	    <input type = 'hidden' name = '_method' value = 'patch'>
 	     <label for="picture_picture">Picture</label>
+
+
+<form action="#">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+  </form>
+
 	    <input type="file" name="trip[picture]" id="picture_picture">
 	    <br>
-	    <input type="submit" value="Add Trip Cover Picture">
+      <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Add Trip Picture</a>
+<!-- 	    <input type="submit" value="Add Trip Cover Picture"> -->
 	</form>
 
 	<% count = 0 %>
@@ -165,11 +162,11 @@
   </div>
 </section>
 
-<section class="module content">
+<!-- <section class="module content">
   <div class="container">
 
   </div>
-</section>
+</section> -->
 
 
 </body>
