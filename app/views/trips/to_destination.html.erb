@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popular</title>
+</head>
+<body>
+	<div class="container">
+	
+	<% @trips.each do |t| %>
+		<%= t.first_name %><br>
+		<%= t.description %><br>
+		<%= t.u_likes %><br>
+		<%= t.start_date %><br>
+		<%= t.end_date %><br>
+	<% end %>
+
+
+	</div>
+</body>
+</html>

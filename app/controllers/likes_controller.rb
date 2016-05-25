@@ -6,7 +6,7 @@ class LikesController < ApplicationController
   end
 
   def create
-    @like = Like.new(user_id: current_user.id, likeable_type: params[:type], likeable_id: params[:object_id])
+    @like = Like.new(user_id: current_user.id, likeable_type: params[:likeable_type], likeable_id: params[:likeable_id])
     if @like.save
       redirect_to :back
     else
@@ -25,7 +25,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = Like.find_by(user_id: current_user.id, likeable_type: params[:type], likeable_id: params[:object_id])
+    @like = Like.find_by(user_id: current_user.id, likeable_type: params[:likeable_type], likeable_id: params[:likeable_id])
     if @like.destroy
       redirect_to :back
     else

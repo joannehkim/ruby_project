@@ -6,6 +6,7 @@
   <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
   <section class="module parallax parallax-1">
   <div class="container">
     <h1>Serene</h1>
@@ -53,6 +54,63 @@
       <h3>Add a Place:</h3>
         <div class="row">
           <form class="col s12">
+
+<div class = "container">
+<!-- 	<h1><%= @trip.destination %></h1> -->
+	<% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
+		<form action='/likes' method='POST'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input name = "_method" value = 'delete' type = 'hidden'>
+			<input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+			<input name="likeable_type" value="place" type="hidden">
+			<input type="submit" value="Unlike">
+		</form>
+	<% else %>
+		<form action='/likes' method='POST'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+			<input name="likeable_type" value="Trip" type="hidden">
+			<input type="submit" value="Like">
+		</form>
+	<% end %>
+	<b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
+	<table>
+		<tr>
+			<td>Description:</td>
+			<td><%= @trip.description %></td>
+		</tr>
+		<tr>
+			<td>Date:</td>
+			<td><%= @trip.start_date %> => <%= @trip.end_date %></td>
+		</tr>
+	</table>
+	<% count = 0 %>
+	<% @places.each do |p| %>
+	<% count += 1 %>
+	<h3>Place #<%= count %></h3>
+	<table>
+		<% if @picture = Picture.find_by(place_id: p.id) %>
+		<div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
+		<% end %>
+		<tr>
+			<td>Location:</td>
+			<td><%= p.location %></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><%= p.description %></td>
+		</tr>
+		<tr>
+			<td>Date:</td>
+			<td><%= p.datetime %> </td>
+		</tr>
+
+	</table>
+	<% end %>
+</div>
+<footer class="page-footer">
+          <div class="container">
+
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">language</i>
