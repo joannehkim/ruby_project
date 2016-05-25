@@ -1,82 +1,90 @@
-<style>
-img{
-	height:400px;
-}
-</style>
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+</head>
 <body>
-	<nav class="">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Compass</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-target="#modal1">Sign Up</a>
-          <div id="modal1" class="modal">
-            <div class="modal-content">
-              <h1>Sign Up</h1>
-              <form action='/users' method='POST'>
-                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-                <input id="icon_prefix" placeholder="First name" type="text" name="user[first_name]"></p>
-                <input placeholder="Last name" type="text" name="user[last_name]"></p>
-                <input placeholder="Email" type="text" name="user[email]"></p>
-                <input placeholder="Password" type="password" name="user[password]"></label></p>
-                <input placeholder="Confirm Password" type="password" name="user[password_confirmation]"></p>
-                <input type="submit" value="Sign Up"></p>
-              </form>
-            </div>
-          </div>
-        </li>
-        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2" data-target="#modal2">Login</a>
-          <div id="modal2" class="modal">
-            <div class="modal-content">
-              <h1>Login</h1>
-              <form action='/sessions' method='POST'>
-                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-                <label>Email: <input type="text" name="email"></label></p>
-                <label>Password <input type="text" name="password"></label></p>
-                <input type="submit" value="Login">
-              </form>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-<div class = "container">
-	<h1><%= @trip.destination %></h1>
-	<table>
-		<tr>
-			<td>Description:</td>
-			<td><%= @trip.description %></td>
-		</tr>
-		<tr>
-			<td>Date:</td>
-			<td><%= @trip.start_date %> => <%= @trip.end_date %></td>
-		</tr>
-	</table>
+  <section class="module parallax parallax-1">
+  <div class="container">
+    <h1>Serene</h1>
+  </div>
+</section>
 
-</div>
-<footer class="page-footer">
-          <div class="container">
+<section class="module content">
+  <div class="container">
+    <h2></h2>
+    <p></p>
+  </div>
+</section>
+
+<section class="module parallax parallax-2">
+  <div class="container">
+    <h1>Rise</h1>
+  </div>
+</section>
+
+<section class="module content">
+  <div class="container">
+
+      <table>
+        <thead>
+          <tr>
+              <th data-field="id">Name</th>
+              <td><%= @trip.user.first_name %> <%= @trip.user.last_name %></td>
+          </tr>
+          <tr>
+              <th data-field="id">Destination</th>
+              <td><%= @trip.destination %></td>
+          </tr>
+          <tr>
+              <th data-field="id">Description</th>
+              <td><%= @trip.description %></td>
+          </tr>
+          <tr>
+              <th data-field="id">Trip Date</th>
+              <td><%= @trip.start_date.to_date %> ~ <%= @trip.end_date.to_date %></td>
+          </tr>
+        </thead>
+      </table>
+
+      <% if current_user.id == @trip.user_id %>
+      <h3>Add a Place:</h3>
+        <div class="row">
+          <form class="col s12">
             <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">language</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Location</label>
+              </div><br>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                <input id="icon_telephone" type="tel" class="validate">
+                <label for="icon_telephone">Description</label>
               </div>
             </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-</footer>
+            <a class="waves-effect waves-light btn-large"><i class="material-icons right">cloud</i>button</a>
+          </form>
+        </div>
+      <% end %>
+
+
+
+  </div>
+</section>
+
+<section class="module parallax parallax-3">
+  <div class="container"><br>
+    <h1><%= @trip.destination %></h1>
+  </div>
+</section>
+
+<section class="module content">
+  <div class="container">
+
+  </div>
+</section>
+</body>
+</html>
