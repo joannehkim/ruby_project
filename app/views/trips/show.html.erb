@@ -113,9 +113,7 @@
 
 	</table>
 
-	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	    <input type = 'hidden' name = '_method' value = 'patch'>
-	     <label for="picture_picture">Picture</label>
+
 
 
 <form action="#">
@@ -129,11 +127,13 @@
       </div>
     </div>
   </form>
-
+  	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	    <input type = 'hidden' name = '_method' value = 'patch'>
+	     <label for="picture_picture">Picture</label>
 	    <input type="file" name="trip[picture]" id="picture_picture">
 	    <br>
       <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Add Trip Picture</a>
-<!-- 	    <input type="submit" value="Add Trip Cover Picture"> -->
+	    <input type="submit" value="Add Trip Cover Picture">
 	</form>
 
 	<% count = 0 %>
