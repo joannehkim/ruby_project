@@ -97,12 +97,18 @@
 		  </div>
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
-     <form action='/comments' method='POST'>
-		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		<input name = "comment[content]" type = 'text'>
-		<input name="commentable_id" value="<%= @trip.id %>" type="hidden">
-		<input name="commentable_type" value="Trip" type="hidden">
-		<input type="submit" value="Add a New Comment!">
+
+    <h4>Comments:</h4>
+    <% @comments.each do |c| %>
+      <%= c.content %><br>
+      - <%= c.user.first_name %>
+    <% end %>
+    <form action='/comments' method='POST'>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name = "comment[content]" type = 'text'>
+      <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
+      <input name="comment[commentable_type]" value="Trip" type="hidden">
+      <input type="submit" value="Add a New Comment!">
     </form>
     <% if current_user.id == @trip.user_id %>
       <center>
@@ -114,17 +120,17 @@
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">language</i>
-                <input id="icon_prefix" type="text" class="validate">
+                <input id="icon_prefix" type="text" class="validate" name="place[location]">
                 <label for="icon_prefix">Location</label>
               </div><br>
               <div class="input-field col s12">
                 <i class="material-icons prefix">mode_edit</i>
-                <input id="icon_telephone" type="tel" class="validate">
+                <input id="icon_telephone" type="tel" class="validate" name="place[description]">
                 <label for="icon_telephone">Description</label>
               </div>
               <div class="input-field col s12">
                 <i class="material-icons prefix">toc</i>
-                <input id="date" type="date" class="datepicker">
+                <input id="date" type="date" class="datepicker" name="place[date]">
                 <label for="date">Date</label>
               </div>
 
@@ -137,43 +143,38 @@
     <% end %>
 <hr>
 <div class = "container">
-<!-- 	<h1><%= @trip.destination %></h1> -->
-<!-- 	<table>
-		<tr>
-			<td>Description:</td>
-			<td><%= @trip.description %></td>
-		</tr>
-		<tr>
-			<td>Date:</td>
-			<td><%= @trip.start_date %> => <%= @trip.end_date %></td>
-		</tr>
-	</table> -->
-
 	</table>
 
 
 
 
-<form action="#">
+  <form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type = 'hidden' name = '_method' value = 'patch'>
     <div class="file-field input-field">
       <div class="btn">
         <span>File</span>
-        <input type="file">
+      <input type="file" name="trip[picture]" id="picture_picture">
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
+      <button class="btn" type="submit">Add Trip Picture</button>
     </div>
   </form>
-  	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+<!-- 	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+    <div class="file-field input-field">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 	    <input type = 'hidden' name = '_method' value = 'patch'>
 	     <label for="picture_picture">Picture</label>
 	    <input type="file" name="trip[picture]" id="picture_picture">
 	    <br>
       <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Add Trip Picture</a>
 	    <input type="submit" value="Add Trip Cover Picture">
-	</form>
-
+	 </div>
+  </form>
+ -->
 	<% count = 0 %>
 	<% @places.each do |p| %>
 	<% count += 1 %>

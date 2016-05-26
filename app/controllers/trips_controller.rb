@@ -14,6 +14,7 @@ class TripsController < ApplicationController
   end
 
   def create
+    fail
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
     if @trip.save
@@ -27,6 +28,7 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
     @places = Place.where(trip_id: @trip.id)
+    @comments = Comment.where(commentable_type: "Trip", commentable_id: @trip.id)
   end
 
   def edit

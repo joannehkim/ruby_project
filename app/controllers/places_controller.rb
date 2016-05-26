@@ -22,7 +22,7 @@ class PlacesController < ApplicationController
     @picture = Picture.new
     @pictures = Picture.where(place_id: params[:id])
     @costs = Cost.where(place_id: params[:id])
-
+    @comments = Comment.where(commentable_type: "Place", commentable_id: @place.id)
 
   end
 
