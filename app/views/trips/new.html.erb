@@ -1,35 +1,180 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create a Trip</title>
-	<!-- Compiled and minified CSS -->
- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+	<title></title>
 
-	<!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-	<style type="text/css">
-		.row{
-			margin: 40px 10px;
-		}
-	</style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+  $(document).ready(function() {
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  });
+  </script>
+
+<style type="text/css">
+/* ============================================================
+  PRIMARY STRUCTURE
+============================================================ */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+  SECTIONS
+============================================================ */
+section.module:last-child {
+  margin-bottom: 0;
+}
+section.module h2 {
+  margin-bottom: 40px;
+  font-family: "Roboto Slab", serif;
+  font-size: 30px;
+}
+section.module p {
+  margin-bottom: 40px;
+  font-size: 16px;
+  font-weight: 300;
+}
+section.module p:last-child {
+  margin-bottom: 0;
+}
+section.module.content {
+  padding: 40px 0;
+}
+section.module.parallax {
+  padding: 240px 0;
+  background-position: 0 0;
+}
+section.module.parallax h1 {
+  color: #1e1e1e;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px white;
+}
+section.module.parallax-1 {
+  background-image: url("/assets/sandiego.jpg");
+}
+section.module.parallax-2 {
+  background-image: url("/assets/london.jpg");
+}
+section.module.parallax-3 {
+  background-image: url("/assets/seattle.jpg");
+}
+
+@media all and (min-width: 600px) {
+  section.module h2 {
+    font-size: 42px;
+  }
+  section.module p {
+    font-size: 20px;
+  }
+  section.module.parallax {
+    padding: 300px 0;
+  }
+  section.module.parallax h1 {
+    font-size: 96px;
+  }
+}
+@media all and (min-width: 960px) {
+  section.module.parallax h1 {
+    font-size: 160px;
+  }
+}
+
+
+
+</style>
+
+
 </head>
 <body>
 
-<div id="container">
-	
-<h1>Create a new Trip</h1>
+<section class="module parallax parallax-1">
+  <div class="container">
+    <h1></h1>
+  </div>
+</section>
 
-<form action='/trips' method='POST'>
-	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<label>Destination: <input type="text" name="trip[destination]"></label></p>
-	<label>Description of your trip: <input type="text" name="trip[description]"></label></p>
-	<label>Start Date: <input type="date" name="trip[start_date]"></label></p>
-	<label>End Date: <input type="date" name="trip[end_date]"></label></p>
-	<input type="submit" value="Create trip">
-</form>
+<section class="module content">
+  <div class="container">
+<center>
+      <h3>Create a new Trip</h3>
+        <div class="row">
+          <form class="col s12" action="/trips" method="POST">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <div class="container">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">language</i>
+                <input name="trip[destination]"id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Destination</label>
+              </div><br>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                <input name="trip[description]"id="icon_telephone" type="tel" class="validate">
+                <label for="icon_telephone">Description</label>
+              </div>
+
+              <div class="input-field col s12">
+                <i class="material-icons prefix">toc</i>
+                <input name="trip[start_date]" id="date" type="date" class="datepicker">
+                <label for="date">Start Date</label>
+              </div>
+
+              <div class="input-field col s12">
+                <i class="material-icons prefix">toc</i>
+                <input name="trip[end_date]" id="date2" type="date" class="datepicker">
+                <label for="date2">End Date</label>
+              </div>
+
+
+            </div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn-large">Create Your Trip</button>
+          </form>
+        </div>
+  </div>
+</section>
+
+<section class="module parallax parallax-2">
+  <div class="container">
+
+  </div>
+</section>
 
 
 
 
-</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
