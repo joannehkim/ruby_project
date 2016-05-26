@@ -5,8 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//cdn.muicss.com/mui-0.6.0/css/mui.min.css" rel="stylesheet" type="text/css" />
+    
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
     <script src="//cdn.muicss.com/mui-0.6.0/js/mui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+          
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <style>
 
@@ -18,7 +22,6 @@ body {
   height: 100%;
   background-color: #fffeef;
 }
-
 html,
 body,
 input,
@@ -28,12 +31,11 @@ buttons {
   -moz-osx-font-smoothing: grayscale;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
-
-
 /**
  * Layout CSS
  */
 #header {
+  background-color: #5F9EA0;
   position: fixed;
   top: 0;
   right: 0;
@@ -41,7 +43,6 @@ buttons {
   z-index: 2;
   transition: left 0.2s;
 }
-
 #sidedrawer {
   position: fixed;
   top: 0;
@@ -53,67 +54,52 @@ buttons {
   background-color: #5F9EA0;
   transition: transform 0.2s;
 }
-
 #content-wrapper {
   min-height: 100%;
   overflow-x: hidden;
   margin-left: 0px;
   transition: margin-left 0.2s;
-
   /* sticky bottom */
   margin-bottom: -160px;
   padding-bottom: 160px;
 }
-
 #footer {
   height: 160px;
   margin-left: 0px;
   transition: margin-left 0.2s;
 }
-
 @media (min-width: 768px) {
   #header {
     left: 200px;
   }
-
   #sidedrawer {
     transform: translate(200px);
   }
-
   #content-wrapper {
     margin-left: 200px;
   }
-
   #footer {
     margin-left: 200px;
   }
-
   body.hide-sidedrawer #header {
     left: 0;
   }
-
   body.hide-sidedrawer #sidedrawer {
     transform: translate(0px);
   }
-
   body.hide-sidedrawer #content-wrapper {
     margin-left: 0;
   }
-
   body.hide-sidedrawer #footer {
     margin-left: 0;
   }
 }
-
-
 /**
  * Toggle Side drawer
  */
 #sidedrawer.active {
   transform: translate(200px);
 }
-
-
 /**
  * Header CSS
  */
@@ -124,13 +110,10 @@ buttons {
   line-height: 20px;
   margin-right: 10px;
 }
-
 .sidedrawer-toggle:hover {
   color: #fff;
   text-decoration: none;
 }
-
-
 /**
  * Footer CSS
  */
@@ -138,7 +121,6 @@ buttons {
   background-color: #5F9EA0;
   color: #fff;
 }
-
 #footer a {
   color: #fff;
   text-decoration: underline;
@@ -149,41 +131,109 @@ buttons {
 #sidedrawer-brand {
   padding-left: 20px;
 }
-
 #sidedrawer ul {
   list-style: none;
 }
-
 #sidedrawer > ul {
   padding-left: 0px;
 }
-
 #sidedrawer > ul > li:first-child {
   padding-top: 15px;
 }
-
 #sidedrawer strong {
   display: block;
   padding: 15px 22px;
   cursor: pointer;
 }
-
 #sidedrawer strong:hover {
   background-color: #5F9EA0;
 }
-
 #sidedrawer strong + ul > li {
   padding: 6px 0px;
 }
+      .nav{
+        height:60px;
+        width:auto;
+        background-color: #5F9EA0;
+      }
+      .fixed{
+        height:60px;
+        width:100%;
+        display:block;
+        position: fixed;
+      }
+      #container{
+        width: 700px;
+        display: inline-block;
+      }
+      .profileLocation{
+        /*background-image: url("/assets/newyork.jpg");*/
+        background-repeat: no-repeat;
+        max-width: 100%;
+        max-height: 100%;
+        background-size: 100%;
+        width: 700px;
+        height: 400px;
+        color:white;
+        font-weight: bold;
+        font-size: 50px;
+        text-align: center;
+        display: inline-block;
+      }
+      #fixed_map{
+        height: 100%;
+        width: 560px;
+        display: inline-block;
+        vertical-align: top;
+        background-color: #CCC;
+        position: fixed;
+      }
+      #map{
+        height: 100%;
+        width: 560px;
+        border: 1px solid black;
+        display: inline-block;
+        vertical-align: top;
+        background-color: #CCC;
+        position: absolute;
+      }
+      .usersList{
+        padding: 0px 20px ;
+        display: inline-block;
+        width: 700px;
+        vertical-align: top;
+      }
+      .trips{
+        border: 1px solid black;
+        height: 200px;
+        width: 400px;
+        margin: 50px 40px 50px 120px;
+        text-align: center;
+        padding:40px 25px;
+      }
+      .mui-container-fluid{
+        padding:0px;
+      }
+      .resizeimg{
+        border-radius: 50%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      .bgcolor{
+        background-color: #5F9EA0;
+      }
+      a{
+        text-decoration: none;
+        color: white;
+      }
     </style>
 
 
     <script>
+
 jQuery(function($) {
   var $bodyEl = $('body'),
       $sidedrawerEl = $('#sidedrawer');
-
-
   function showSidedrawer() {
     // show overlay
     var options = {
@@ -193,31 +243,23 @@ jQuery(function($) {
           .appendTo(document.body);
       }
     };
-
     var $overlayEl = $(mui.overlay('on', options));
-
     // show element
     $sidedrawerEl.appendTo($overlayEl);
     setTimeout(function() {
       $sidedrawerEl.addClass('active');
     }, 20);
   }
-
-
   function hideSidedrawer() {
     $bodyEl.toggleClass('hide-sidedrawer');
   }
-
-
   $('.js-show-sidedrawer').on('click', showSidedrawer);
   $('.js-hide-sidedrawer').on('click', hideSidedrawer);
 });
 var $titleEls = $('strong', $sidedrawerEl);
-
 $titleEls
   .next()
   .hide();
-
 $titleEls.on('click', function() {
   $(this).next().slideToggle(200);
 });
@@ -225,55 +267,99 @@ $titleEls.on('click', function() {
   </head>
   <body>
 <div id="sidedrawer" class="mui--no-user-select">
-<div id="sidedrawer-brand" class="mui--appbar-line-height mui--text-title">User Name</div>
+<div id="sidedrawer-brand" class="mui--appbar-line-height mui--text-title" style="text-align: center">Profile</div>
 <div class="mui-divider"></div>
 <ul>
+<li><img src="/assets/cap.png" class='resizeimg'></li>
   <li>
-    <strong>Category 1</strong>
-    <ul>
-      <li><a href="#">Item 1</a></li>
-      <li><a href="#">Item 2</a></li>
-      <li><a href="#">Item 3</a></li>
-    </ul>
+    <strong style="text-align: center">Jasper Pascual</strong>
   </li>
+  <li style="text-align: center">jasper@test.com</li>
 </ul>
 </div>
 <header id="header">
   <div class="mui-appbar mui--appbar-line-height">
+    <div class="bgcolor">
     <div class="mui-container-fluid">
       <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">☰</a>
       <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">☰</a>
+
+      <a class="logo" href="">Compass</a>
+
       <span class="mui--text-title mui--visible-xs-inline-block">User Name</span>
+    </div>
     </div>
   </div>
 </header>
 <div id="content-wrapper">
 <div class="mui--appbar-height"></div>
 <div class="mui-container-fluid">
-  <br>
-  <h1>User Name</h1>
-  <p>
-    Name: 
-  </p>
-  <p>
-    Posts:
-  </p>
-  <p>
-    Likes:
-  </p>
+
+
+
+
+
+<div id="container">
+
+
+    <div class="profileLocation">
+      <img class="profileLocation" src="/assets/newyork.jpg">
+    </div>
+
+    <br>
+    <br>
+    <div id="button">
+    <a href="/trips/new" class="waves-effect waves-light btn-large">Create a Trip!</a>
+    </div>
+    <br>
+
+
+    <div class="usersList">
+      <h3>Hey, <%= current_user.first_name %>!!</h3>
+      <h3>Here are the cities you've visited</h3>
+      <h5>A definitive guide of the best local spots, as told by you! </h5>
+
+
+      <div class="trips">
+        <a href=""><h3>Seattle, WA</h3></a>
+        <p>Some description</p>
+      </div>
+
+      <div class="trips">
+         <a href=""><h3>London, UK</h3></a>
+        <p>Some description</p>
+      </div>
+
+      <div class="trips">
+         <a href=""><h3>New York, NY</h3></a>
+        <p>Some description</p>
+      </div>     
+    </div>
+
 </div>
 
-<% if @user.avatar_file_name %>
-  <div class = 'place_image'><%= image_tag @user.avatar.url  %></div>
-<% end %>
+  <div id="fixed_map">
+    <div id="map">
+      <script>
+        function initMap() {
+          var mapDiv = document.getElementById('map');
+          var map = new google.maps.Map(mapDiv, {
+            center: {lat: 44.540, lng: -78.546},
+            zoom: 8
+          });
+        }
 
-<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/users/<%= current_user.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-    <input type = 'hidden' name = '_method' value = 'patch'>
-     <label for="picture_picture">Picture</label>
-    <input type="file" name="user[avatar]" id="picture_picture">
-    <br>
-    <input type="submit" value="Add Avatar Picture">
-</form>
+      </script>
+      <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
+      </script>
+      
+    </div>
+  </div>
+
+</div>
+
+
 </div>
 <!-- <footer id="footer">
   <div class="mui-container-fluid">
@@ -281,5 +367,7 @@ $titleEls.on('click', function() {
     Made with ♥ by <a href="https://www.muicss.com">MUI</a>
   </div>
 </footer> -->
+
+
   </body>
 </html>
