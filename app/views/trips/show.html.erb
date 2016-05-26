@@ -13,6 +13,25 @@
   });
   });
   </script>
+  <style>
+  #fixed_map{
+        height: 100%;
+        width: 560px;
+        display: inline-block;
+        vertical-align: top;
+        background-color: #CCC;
+        position: fixed;  
+      }
+      #map{
+        height: 100%;
+        width: 560px;
+        border: 1px solid black;
+        display: inline-block;
+        vertical-align: top;
+        background-color: #CCC;
+        /*position: absolute;*/
+      }
+  </style>
 </head>
 <body>
 
@@ -57,6 +76,25 @@
 		      <input type="submit" value="Like">
 		    </form>
 		  <% end %>
+
+		  <div id="fixed_map">
+		    <div id="map">
+		      <script>
+		        function initMap() {
+		          var mapDiv = document.getElementById('map');
+		          var map = new google.maps.Map(mapDiv, {
+		            center: {lat: 44.540, lng: -78.546},
+		            zoom: 8
+		          });
+		        }
+
+		      </script>
+		      <script async defer
+		        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
+		      </script>
+		      
+		    </div>
+		  </div>
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
      <form action='/comments' method='POST'>
