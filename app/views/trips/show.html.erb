@@ -125,7 +125,7 @@
 	<% count = 0 %>
 	<% @places.each do |p| %>
 	<% count += 1 %>
-	<h3>Place #<%= count %></h3>
+	<a href="/places/<%= p.id %>"><h3>Place #<%= count %></h3></a>
 	<table>
 		<% if @picture = Picture.find_by(place_id: p.id) %>
 		<div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
