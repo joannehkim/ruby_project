@@ -4,8 +4,8 @@
   <title></title>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
-</head>
+  
+</head><link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 <body>
 
 <section class="module content">
@@ -25,7 +25,7 @@
               <p>By <%= t.first_name %></p>
 
             <%= t.start_date.strftime("%B %d, %Y") %> - <%= t.end_date.strftime("%B %d, %Y") %></div>
-	      		<%= t.start_date.strftime("%B %d, %Y") %> - <%= t.end_date.strftime("%B %d, %Y") %></div>
+
             <div class="card-action">
               <a href="/trips/<%= t.id %>">View Itinerary</a>
             <%= t.u_likes %> Likes
