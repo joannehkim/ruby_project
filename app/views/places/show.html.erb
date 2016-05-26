@@ -5,7 +5,7 @@ img{
 </style>
 
 <body>
-	<nav class="">
+	<nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Compass</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -42,9 +42,22 @@ img{
     </div>
   </nav>
 <div class = "container">
-	<h1><%= @place.location %></h1>
-
-	<table>
+  <div>
+  	<h1><%= @place.location %></h1>
+    <h4>Comments:</h4>
+    <% @comments.each do |c| %>
+      <%= c.content %><br>
+      - <%= c.user.first_name %>
+    <% end %>
+    <form action='/comments' method='POST'>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name = "comment[content]" type = 'text'>
+      <input name="comment[commentable_id]" value="<%= @place.id %>" type="hidden">
+      <input name="comment[commentable_type]" value="Place" type="hidden">
+      <input type="submit" value="Add a New Comment!">
+    </form>
+  </div>
+  <!-- ^wanted to put this comment form on the side...-->
 		<tr>
 			<td>Description:</td>
 			<td><%= @place.description %></td>
@@ -53,7 +66,8 @@ img{
 			<td>Date:</td>
 			<td><%= @place.datetime %></td>
 		</tr>
-     <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
+
+    <% if Like.find_by(user_id: current_user.id, likeable_id: @place.id, likeable_type: "Place") %>
     <form action='/likes' method='POST'>
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       <input name = "_method" value = 'delete' type = 'hidden'>

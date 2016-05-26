@@ -59,12 +59,18 @@
 		  <% end %>
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
-     <form action='/comments' method='POST'>
-		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		<input name = "comment[content]" type = 'text'>
-		<input name="commentable_id" value="<%= @trip.id %>" type="hidden">
-		<input name="commentable_type" value="Trip" type="hidden">
-		<input type="submit" value="Add a New Comment!">
+
+    <h4>Comments:</h4>
+    <% @comments.each do |c| %>
+      <%= c.content %><br>
+      - <%= c.user.first_name %>
+    <% end %>
+    <form action='/comments' method='POST'>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name = "comment[content]" type = 'text'>
+      <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
+      <input name="comment[commentable_type]" value="Trip" type="hidden">
+      <input type="submit" value="Add a New Comment!">
     </form>
     <% if current_user.id == @trip.user_id %>
       <center>

@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.create(comment_params)
+    @comment = Comment.create(content: comment_params[:content], user_id: current_user.id, commentable_id: comment_params[:commentable_id], commentable_type: comment_params[:commentable_type])
     redirect_to :back
   end
 

@@ -27,6 +27,7 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
     @places = Place.where(trip_id: @trip.id)
+    @comments = Comment.where(commentable_type: "Trip", commentable_id: @trip.id)
   end
 
   def edit
