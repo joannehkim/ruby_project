@@ -5,8 +5,9 @@ class TripsController < ApplicationController
   end
 
   def to_destination
-    @trips = Trip.most_liked(params[:id])
-    @destination = Trip.find_by(destination: params[:id]).destination
+    destination = params[:id].gsub("_", " ")
+    @trips = Trip.most_liked(destination)
+    @destination = Trip.find_by(destination: destination).destination
   end
 
   def new

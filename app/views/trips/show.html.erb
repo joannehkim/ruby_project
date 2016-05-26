@@ -39,6 +39,10 @@
   <div class="container">
       <table>
         <thead>
+        	<% if @trip.picture_file_name %>
+				<h3>Trip Album Cover</h3>
+				<div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
+			<% end %>
           <tr>
               <th data-field="id">Name</th>
               <td><%= @trip.user.first_name %> <%= @trip.user.last_name %></td>
@@ -57,29 +61,36 @@
           </tr>
         </thead>
           <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
-    <form action='/likes' method='POST'>
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name = "_method" value = 'delete' type = 'hidden'>
-      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
-      <input name="likeable_type" value="place" type="hidden">
-      <input type="submit" value="Unlike">
-    </form>
-  <% else %>
-    <form action='/likes' method='POST'>
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
-      <input name="likeable_type" value="Trip" type="hidden">
-      <input type="submit" value="Like">
-    </form>
-  <% end %>
+		    <form action='/likes' method='POST'>
+		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		      <input name = "_method" value = 'delete' type = 'hidden'>
+		      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+		      <input name="likeable_type" value= "Trip" type="hidden">
+		      <input type="submit" value="Unlike">
+		    </form>
+		  <% else %>
+		    <form action='/likes' method='POST'>
+		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+		      <input name="likeable_type" value="Trip" type="hidden">
+		      <input type="submit" value="Like">
+		    </form>
+		  <% end %>
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
-
-      <% if current_user.id == @trip.user_id %>
+     <form action='/comments' method='POST'>
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<input name = "comment[content]" type = 'text'>
+		<input name="commentable_id" value="<%= @trip.id %>" type="hidden">
+		<input name="commentable_type" value="Trip" type="hidden">
+		<input type="submit" value="Add a New Comment!">
+    </form>
+    <% if current_user.id == @trip.user_id %>
       <center>
       <h3>Add a Place:</h3>
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" action="/places" method="POST">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
             <div class="container">
             <div class="row">
               <div class="input-field col s12">
@@ -99,9 +110,10 @@
               </div>
             </div>
             </div>
-            <a class="waves-effect waves-light btn-large"><i class="material-icons right">cloud</i>button</a><br><br>
+            <button type="submit" class="waves-effect waves-light btn-large">Add Place</button>
           </form>
         </div>
+    <% end %>
 <hr>
 <div class = "container">
 <!-- 	<h1><%= @trip.destination %></h1> -->
@@ -118,9 +130,7 @@
 	</table> -->
 
 	</table>
-	<% if @trip.picture_file_name %>
-	<div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
-	<% end %>
+
 	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 	    <input type = 'hidden' name = '_method' value = 'patch'>
 	     <label for="picture_picture">Picture</label>
@@ -155,7 +165,6 @@
 </div>
 <!-- <footer class="page-footer"> -->
 
-      <% end %>
   </div>
 </section>
 
