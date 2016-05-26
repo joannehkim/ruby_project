@@ -76,22 +76,22 @@
       <center>
       <h3>Add a Place:</h3>
         <div class="row">
-          <form class="col s12" action="/places" method="POST">
+          <form class="col s9" action="/places" method="POST">
             <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
             <input name = "place[trip_id]" value = "<%= @trip.id %>" type = 'hidden'>
             <div class="container">
             <div class="row">
-              <div class="input-field col s12">
+              <div class="input-field col s9">
                 <i class="material-icons prefix">language</i>
                 <input id="icon_prefix" type="text" class="validate" name="place[location]">
                 <label for="icon_prefix">Location</label>
               </div><br>
-              <div class="input-field col s12">
+              <div class="input-field col s9">
                 <i class="material-icons prefix">mode_edit</i>
                 <input id="icon_telephone" type="tel" class="validate" name="place[description]">
                 <label for="icon_telephone">Description</label>
               </div>
-              <div class="input-field col s12">
+              <div class="input-field col s9">
                 <i class="material-icons prefix">toc</i>
                 <input id="date" type="date" class="datepicker" name="place[datetime]">
                 <label for="date">Date</label>

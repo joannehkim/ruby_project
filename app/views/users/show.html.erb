@@ -172,20 +172,16 @@
       <h3>Hey, <%= current_user.first_name %>!!</h3>
       <h3>Here are the cities you've visited</h3>
       <h5>A definitive guide of the best local spots, as told by you! </h5>
-      <div class="trips">
-        <a href=""><h3>Seattle, WA</h3></a>
-        <p>Some description</p>
-      </div>
 
+      <% @UT.each do | u | %>
       <div class="trips">
-         <a href=""><h3>London, UK</h3></a>
-        <p>Some description</p>
+        <a href=""><h3><%= u.destination %></h3></a>
+        <p><%= u.description %></p>
       </div>
+      <% end %>
 
-      <div class="trips">
-         <a href=""><h3>New York, NY</h3></a>
-        <p>Some description</p>
-      </div>     
+
+
     </div>
 </div>
 
