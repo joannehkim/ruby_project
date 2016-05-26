@@ -147,7 +147,7 @@
       <a href="/" class="brand-logo">Compass</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/trips/new">Create a Trip</a></li>
-        <li><a href="collapsible.html">Logout</a></li>
+        <li><a href="/sessions/<%=params[:id]%>" data-method='delete'>Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -164,23 +164,29 @@
     </div>
 
       <div class="favorites">
-        <p><i class="material-icons prefix">loyalty</i> Favorites: 69 </p>  
-        <p><i class="material-icons prefix">perm_contact_calendar</i> Places Visited: 100</p> 
+        <p style="text-align: center"><i class="material-icons prefix">loyalty</i> Favorites: <%= @likes %> </p>  
+        <p style="text-align: center"><i class="material-icons prefix">perm_contact_calendar</i> Places Visited: <%= @UT.count %></p> 
       </div>
 
     <div class="usersList">
       <h3>Hey, <%= current_user.first_name %>!!</h3>
-      <h3>Here are the cities you've visited</h3>
-      <h5>A definitive guide of the best local spots, as told by you! </h5>
 
-      <% @UT.each do | u | %>
-      <div class="trips">
-        <a href=""><h3><%= u.destination %></h3></a>
-        <p><%= u.description %></p>
-      </div>
+      <% if @UT.length == 0 %>
+
+        <h3>Add trips to share with friends!</h3>
+
+      <% else %>
+
+        <h4>Here are the cities you've visited</h4>
+        <h5>A definitive guide of the best local spots, as told by you! </h5>
+
+        <% @UT.each do | u | %>
+          <div class="trips">
+            <a href=""><h3><%= u.destination %></h3></a>
+            <p><%= u.description %></p>
+          </div>
+        <% end %>
       <% end %>
-
-
 
     </div>
 </div>
