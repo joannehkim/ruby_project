@@ -70,7 +70,7 @@
       <input name = "comment[content]" type = 'text'>
       <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
       <input name="comment[commentable_type]" value="Trip" type="hidden">
-      <input type="submit" value="Add a New Comment!">
+      <button type="submit" class="btn">Add Comment</button>
     </form>
     <% if current_user.id == @trip.user_id %>
       <center>
@@ -157,7 +157,6 @@
 			<td>Date:</td>
 			<td><%= p.datetime %> </td>
 		</tr>
-
 	</table>
 	<% end %>
 </div>
