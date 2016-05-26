@@ -67,10 +67,10 @@
     <% end %>
     <form action='/comments' method='POST'>
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name = "comment[content]" type = 'text'>
+      <input name = "comment[content]" type = 'text' value='Add a Comment'>
       <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
       <input name="comment[commentable_type]" value="Trip" type="hidden">
-      <input type="submit" value="Add a New Comment!">
+      <button type="submit" class="waves-effect waves-light btn-large">Add a New Comment</button>
     </form>
     <% if current_user.id == @trip.user_id %>
       <center>
@@ -78,6 +78,7 @@
         <div class="row">
           <form class="col s12" action="/places" method="POST">
             <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input name = "place[trip_id]" value = "<%= @trip.id %>" type = 'hidden'>
             <div class="container">
             <div class="row">
               <div class="input-field col s12">
@@ -92,24 +93,15 @@
               </div>
               <div class="input-field col s12">
                 <i class="material-icons prefix">toc</i>
-                <input id="date" type="date" class="datepicker" name="place[date]">
+                <input id="date" type="date" class="datepicker" name="place[datetime]">
                 <label for="date">Date</label>
               </div>
-
-
             </div>
             </div>
             <button type="submit" class="waves-effect waves-light btn-large">Add Place</button>
           </form>
         </div>
-    <% end %>
-<hr>
-<div class = "container">
-	</table>
-
-
-
-
+  <div class="row">
   <form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
     <input type = 'hidden' name = '_method' value = 'patch'>
@@ -124,19 +116,12 @@
       <button class="btn" type="submit">Add Trip Picture</button>
     </div>
   </form>
+  </div>
+    <% end %>
 
-<!-- 	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-    <div class="file-field input-field">
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	    <input type = 'hidden' name = '_method' value = 'patch'>
-	     <label for="picture_picture">Picture</label>
-	    <input type="file" name="trip[picture]" id="picture_picture">
-	    <br>
-      <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Add Trip Picture</a>
-	    <input type="submit" value="Add Trip Cover Picture">
-	 </div>
-  </form>
- -->
+<div class = "container">
+	</table>
+
 	<% count = 0 %>
 	<% @places.each do |p| %>
 	<% count += 1 %>
@@ -161,7 +146,7 @@
 	</table>
 	<% end %>
 </div>
-<!-- <footer class="page-footer"> -->
+
 
   </div>
 </section>
@@ -172,11 +157,7 @@
   </div>
 </section>
 
-<!-- <section class="module content">
-  <div class="container">
 
-  </div>
-</section> -->
 
 
 </body>
