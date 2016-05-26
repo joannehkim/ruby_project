@@ -1,193 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= @place.location %></title>
+	<link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+</head>
+
 <style>
-img{
-	height:400px;
-}
+  img{
+    height:400px;
+  }
 </style>
 
 <body>
-	<nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Compass</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-target="#modal1">Sign Up</a>
-          <div id="modal1" class="modal">
-            <div class="modal-content">
-              <h1>Sign Up</h1>
-              <form action='/users' method='POST'>
-                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-                <input id="icon_prefix" placeholder="First name" type="text" name="user[first_name]"></p>
-                <input placeholder="Last name" type="text" name="user[last_name]"></p>
-                <input placeholder="Email" type="text" name="user[email]"></p>
-                <input placeholder="Password" type="password" name="user[password]"></label></p>
-                <input placeholder="Confirm Password" type="password" name="user[password_confirmation]"></p>
-                <input type="submit" value="Sign Up"></p>
-              </form>
-            </div>
-          </div>
-        </li>
-        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2" data-target="#modal2">Login</a>
-          <div id="modal2" class="modal">
-            <div class="modal-content">
-              <h1>Login</h1>
-              <form action='/sessions' method='POST'>
-                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-                <label>Email: <input type="text" name="email"></label></p>
-                <label>Password <input type="text" name="password"></label></p>
-                <input type="submit" value="Login">
-              </form>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+
 <div class = "container">
   <div>
-  	<h1><%= @place.location %></h1>
-    <h4>Comments:</h4>
-    <% @comments.each do |c| %>
-      <%= c.content %><br>
-      - <%= c.user.first_name %>
-    <% end %>
-    <form action='/comments' method='POST'>
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name = "comment[content]" type = 'text'>
-      <input name="comment[commentable_id]" value="<%= @place.id %>" type="hidden">
-      <input name="comment[commentable_type]" value="Place" type="hidden">
-      <input type="submit" value="Add a New Comment!">
-    </form>
-  </div>
-  <!-- ^wanted to put this comment form on the side...-->
-		<tr>
-			<td>Description:</td>
-			<td><%= @place.description %></td>
-		</tr>
-		<tr>
-			<td>Date:</td>
-			<td><%= @place.datetime %></td>
-		</tr>
-
+  <!-- Place name & Like Place -->
+    <h1><%= @place.location %></h1>
     <% if Like.find_by(user_id: current_user.id, likeable_id: @place.id, likeable_type: "Place") %>
-    <form action='/likes' method='POST'>
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name = "_method" value = 'delete' type = 'hidden'>
-      <input name="likeable_id" value="<%= @place.id %>" type="hidden">
-      <input name="likeable_type" value="Place" type="hidden">
-      <input type="submit" value="Unlike">
-    </form>
-  <% else %>
-    <form action='/likes' method='POST'>
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name="likeable_id" value="<%= @place.id %>" type="hidden">
-      <input name="likeable_type" value="Place" type="hidden">
-      <input type="submit" value="Like">
-    </form>
-  <% end %>
-	</table>
-	<%= form_for @picture,  :html => {:multipart => true} do |f| %>
-		<input type = 'hidden' name = 'picture[place_id]' value = "<%= @place.id %>">
-		 <%= f.label :picture %>
-		<%= f.file_field :picture %>
-		<br>
-		<%= f.label :description %>
-		<%= f.text_field :description %>
-		<input type = 'submit' value = 'Add Picture'>
-	<% end %>
-	<% @pictures.each do |p| %>
-		<div class = 'place_image'><%= image_tag p.picture.url %></div> 
-		<%= p.description %>
-    <% if Like.find_by(user_id: current_user.id, likeable_id: p.id, likeable_type: "Picture") %>
-        <form action='/likes' method='POST'>
-          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-          <input name = "_method" value = 'delete' type = 'hidden'>
-          <input name="likeable_id" value="<%= p.id %>" type="hidden">
-          <input name="likeable_type" value= "Picture" type="hidden">
-          <input type="submit" value="Unlike">
-        </form>
+		<form action='/likes' method='POST'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input name = "_method" value = 'delete' type = 'hidden'>
+			<input name="likeable_id" value="<%= @place.id %>" type="hidden">
+			<input name="likeable_type" value="Place" type="hidden">
+			<button type="submit" class="btn">Unlike</button>
+		</form>
       <% else %>
-        <form action='/likes' method='POST'>
-          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-          <input name="likeable_id" value="<%= p.id %>" type="hidden">
-          <input name="likeable_type" value="Trip" type="hidden">
-          <input type="submit" value="Like">
-        </form>
+      <form action='/likes' method='POST'>
+        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+        <input name="likeable_id" value="<%= @place.id %>" type="hidden">
+        <input name="likeable_type" value="Place" type="hidden">
+		<button type="submit" class="btn">Like</button>
+      </form>
       <% end %>
-	<% end %>
-
-
-  <div>
-    <table>
-      <tr>
-        <th>Category</th>
-        <th>Cost</th>
-        <th>Company</th>
-        <th>Description</th>
-      </trr>
-    <% @costs.each do |c| %>
-      <tr>
-        <td><%= c.category %></td>
-        <td><%= c.cost %></td>
-        <td><%= c.company %></td>
-        <td><%= c.description %></td>
-      </tr>
-       <% if Like.find_by(user_id: current_user.id, likeable_id: c.id, likeable_type: "Cost") %>
-        <form action='/likes' method='POST'>
-          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-          <input name = "_method" value = 'delete' type = 'hidden'>
-          <input name="likeable_id" value="<%= c.id %>" type="hidden">
-          <input name="likeable_type" value="Cost" type="hidden">
-          <input type="submit" value="Unlike">
-        </form>
-      <% else %>
-        <form action='/likes' method='POST'>
-          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-          <input name="likeable_id" value="<%= c.id %>" type="hidden">
-          <input name="likeable_type" value="Cost" type="hidden">
-          <input type="submit" value="Like">
-        </form>
-      <% end %>
-    <% end %>
-
-    </table>
   </div>
 
-  <% if @user_id == current_user.id %>
-  <div>
-    <form action="/costs" method="POST">
-      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-      <input type="text" name="cost[category]" placeholder="Category (hotel, transportation, food, etc.)">
-      <input type="text" name="cost[cost]" placeholder="Cost">
-      <input type="text" name="cost[company]" placeholder="Company (Mariott, Greyhound, Metro)">
-      <input type="text" name="cost[description]" placeholder="Description">
-      <input type="hidden" name="cost[place_id]" value="<%= @place.id %>">
-      <button type="submit" class="btn">Add Cost</button>
-    </form>
-  </div>
-  <% end %>
+  <div class="row">
+    <div class="col s5 push-s7">
+      
+      <div>
+      <!-- upload photo, description, like photo -->
+        <% @pictures.each do |p| %>
+            <div class="card large">
+              <div class="card-image">
+                <%= image_tag p.picture.url %>
+                <span class="card-title"><%= p.description %></span>
+              </div>
+              <div class="card-action">
+              <% if Like.find_by(user_id: current_user.id, likeable_id: p.id, likeable_type: "Picture") %>
+				<form action='/likes' method='POST'>
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input name = "_method" value = 'delete' type = 'hidden'>
+					<input name="likeable_id" value="<%= p.id %>" type="hidden">
+					<input name="likeable_type" value= "Picture" type="hidden">
+					<button type="submit" class="btn">Unlike</button>
+				</form>
+              <% else %>
+				<form action='/likes' method='POST'>
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input name="likeable_id" value="<%= p.id %>" type="hidden">
+					<input name="likeable_type" value="Trip" type="hidden">
+					<button type="submit" class="btn">Like</button>
+				</form>
+              <% end %>
+              </div>
+            </div>
+        <% end %>
+      </div>
 
+      <%= form_for @picture,  :html => {:multipart => true} do |f| %>
+        <input type = 'hidden' name = 'picture[place_id]' value = "<%= @place.id %>">
+        <%= f.label :picture %>
+        <%= f.file_field :picture %><br>
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+        <button type ='submit' class='btn'>Upload Picture</button>
+      <% end %>
+    </div>
+
+    <div class="col s7 pull-s5"> 
+      <div>
+      <!-- Info about place -->
+        <p>Description: <%= @place.description %></p>
+        <p>Total Cost: <%= @total_cost %></p>
+        <p>Date: <%= @place.datetime %></p>
+      <div>
+
+      <div>
+      <!-- Cost table, add associated cost -->
+        <h3>Costs Associated with This Place:</h3>
+        <table>
+          <tr>
+            <th>Category</th>
+            <th>Cost</th>
+            <th>Company</th>
+            <th>Description</th>
+          </tr>
+        <% @costs.each do |c| %>
+          <tr>
+            <td><%= c.category %></td>
+            <td><%= c.cost %></td>
+            <td><%= c.company %></td>
+            <td><%= c.description %></td>
+            <td>
+             <% if Like.find_by(user_id: current_user.id, likeable_id: c.id, likeable_type: "Cost") %>
+              <form action='/likes' method='POST'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input name = "_method" value = 'delete' type = 'hidden'>
+                <input name="likeable_id" value="<%= c.id %>" type="hidden">
+                <input name="likeable_type" value="Cost" type="hidden">
+				<button type="submit" class="btn">Unlike</button>
+              </form>
+            <% else %>
+              <form action='/likes' method='POST'>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input name="likeable_id" value="<%= c.id %>" type="hidden">
+                <input name="likeable_type" value="Cost" type="hidden">
+				<button type="submit" class="btn">Like</button>
+              </form>
+            <% end %>
+          <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+		<div>
+		<!-- Comments about place -->
+			<h4>Comments:</h4>
+			<% @comments.each do |c| %>
+			<%= c.content %><br>
+			- <%= c.user.first_name %>
+			<% end %>
+
+			<form action='/comments' method='POST'>
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+				<input name = "comment[content]" type = 'text'>
+				<input name="comment[commentable_id]" value="<%= @place.id %>" type="hidden">
+				<input name="comment[commentable_type]" value="Place" type="hidden">
+				<button type="submit" class="btn">Add Comment</button>
+			</form>
+		</div>
+
+
+      <div>
+      <!-- add cost form if place belongs to current user -->
+        <% if @user_id == current_user.id %>
+          <form action="/costs" method="POST">
+            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+            <input type="text" name="cost[category]" placeholder="Category (hotel, transportation, food, etc.)">
+            <input type="text" name="cost[cost]" placeholder="Cost">
+            <input type="text" name="cost[company]" placeholder="Company (Mariott, Greyhound, Metro)">
+            <input type="text" name="cost[description]" placeholder="Description">
+            <input type="hidden" name="cost[place_id]" value="<%= @place.id %>">
+            <button type="submit" class="btn">Add Cost</button>
+          </form>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-<footer class="page-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-</footer>
+
+
+
+</body>
+</html>
