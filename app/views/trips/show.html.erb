@@ -13,25 +13,27 @@
   });
   });
   </script>
-  <style>
-  #fixed_map{
-        height: 400px;
-        width: 560px;
-        display: inline-block;
-        vertical-align: top;
-        background-color: #CCC;
-        /*position: fixed;  */
-      }
-      #map{
-        height: 400px;
-        width: 560px;
-        border: 1px solid black;
-        display: inline-block;
-        vertical-align: top;
-        background-color: #CCC;
-        /*position: absolute;*/
-      }
-  </style>
+
+<style>
+ #fixed_map{
+       height: 400px;
+       width: 560px;
+       display: inline-block;
+       vertical-align: top;
+       background-color: #CCC;
+       /*position: fixed;  */
+     }
+     #map{
+       height: 400px;
+       width: 560px;
+       border: 1px solid black;
+       display: inline-block;
+       vertical-align: top;
+       background-color: #CCC;
+       /*position: absolute;*/
+     }
+ </style>
+
 </head>
 <body>
 
@@ -39,10 +41,10 @@
   <div class="container">
       <table>
         <thead>
-        	<% if @trip.picture_file_name %>
-				<h3>Trip Album Cover</h3>
-				<div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
-			<% end %>
+          <% if @trip.picture_file_name %>
+        <h3>Trip Album Cover</h3>
+        <div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
+      <% end %>
           <tr>
               <th data-field="id">Name</th>
               <td><%= @trip.user.first_name %> <%= @trip.user.last_name %></td>
@@ -60,109 +62,76 @@
               <td><%= @trip.start_date.to_date %> ~ <%= @trip.end_date.to_date %></td>
           </tr>
         </thead>
-      <div id="fixed_map">
-        <div id="map">
-          <% count = 0 %>
-          <script>
-            var places = []
-          </script>
-          <% @places.each do |p| %>
-          <script> places.push("<%= p.location %>")</script>
-          <% end %>
-          <script>
 
-            function initMap() {
-              console.log(places)
-
-              var geocoder = new google.maps.Geocoder();
-              var address = document.getElementById('destination').innerHTML
-              var trip_location = geocoder.geocode({'address': address}, function(results, status){
-                if (status == google.maps.GeocoderStatus.OK) {
-                  map.setCenter(results[0].geometry.location);
-                  var marker = new google.maps.Marker({
-                      map: map,
-                      position: results[0].geometry.location
-                  });
-                } else {
-                  alert("Geocode was not successful for the following reason: " + status);
-                }
-             });
-              var labels = "123456789";
-              var labelind = 0;
-              for (var i = 0; i<places.length; i++){
-                var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
-                  if (status == google.maps.GeocoderStatus.OK) {
-
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location,
-                        label: labels[labelind++]
+        <div id="fixed_map">
+               <div id="map">
+                 <% count = 0 %>
+                 <script>
+                   var places = []
+                 </script>
+                 <% @places.each do |p| %>
+                 <script> places.push("<%= p.location %>")</script>
+                 <% end %>
+                 <script>
+                   function initMap() {
+                     console.log(places)
+                     var geocoder = new google.maps.Geocoder();
+                     var address = document.getElementById('destination').innerHTML
+                     var trip_location = geocoder.geocode({'address': address}, function(results, status){
+                       if (status == google.maps.GeocoderStatus.OK) {
+                         map.setCenter(results[0].geometry.location);
+                         var marker = new google.maps.Marker({
+                             map: map,
+                             position: results[0].geometry.location
+                         });
+                       } else {
+                         alert("Geocode was not successful for the following reason: " + status);
+                       }
                     });
-                  } else {
-                    alert("Geocode was not successful for the following reason: " + status);
-                  }
-              })};
-              console.log(address)
-              var mapDiv = document.getElementById('map');
-              var map = new google.maps.Map(mapDiv, {
-                zoom: 10
-              });
-            }
+                     var labels = "123456789";
+                     var labelind = 0;
+                     for (var i = 0; i<places.length; i++){
+                       var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
+                         if (status == google.maps.GeocoderStatus.OK) {
+                           var marker = new google.maps.Marker({
+                               map: map,
+                               position: results[0].geometry.location,
+                               label: labels[labelind++]
+                           });
+                         } else {
+                           alert("Geocode was not successful for the following reason: " + status);
+                         }
+                     })};
+                     console.log(address)
+                     var mapDiv = document.getElementById('map');
+                     var map = new google.maps.Map(mapDiv, {
+                       zoom: 10
+                     });
+                   }
+                 </script>
+                 <script async defer
+                   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
+                 </script>
+                 
+               </div>
+             </div>
 
-          </script>
-<!--           <script>
-          
-
-            function initMap() {
-              var mapDiv = document.getElementById('map');
-              var map = new google.maps.Map(mapDiv, {
-                center: {lat: 44.540, lng: -78.546},
-                zoom: 8
-              });
-              
-              
-              
-            function geocodeAddress(geocoder, resultsMap) {
-            var address = "Space Needle";
-            geocoder.geocode({'address': address}, function(results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                resultsMap.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                  map: resultsMap,
-                  position: results[0].geometry.location
-                });
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
-          });
-
-            }
-
-          </script> -->
-          <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
-          </script>
-          
-        </div>
-      </div>
           <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
-		    <form action='/likes' method='POST'>
-		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		      <input name = "_method" value = 'delete' type = 'hidden'>
-		      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
-		      <input name="likeable_type" value= "Trip" type="hidden">
-		      <input type="submit" value="Unlike">
-		    </form>
-		  <% else %>
-		    <form action='/likes' method='POST'>
-		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
-		      <input name="likeable_type" value="Trip" type="hidden">
-		      <input type="submit" value="Like">
-		    </form>
-		  <% end %>
-
-
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name = "_method" value = 'delete' type = 'hidden'>
+          <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+          <input name="likeable_type" value= "Trip" type="hidden">
+          <input type="submit" value="Unlike">
+        </form>
+      <% else %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+          <input name="likeable_type" value="Trip" type="hidden">
+          <input type="submit" value="Like">
+        </form>
+      <% end %>
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
 
@@ -173,33 +142,33 @@
     <% end %>
     <form action='/comments' method='POST'>
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name = "comment[content]" type = 'text'>
+      <input name = "comment[content]" type = 'text' value='Add a Comment'>
       <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
       <input name="comment[commentable_type]" value="Trip" type="hidden">
-      <button type="submit" class="btn">Add Comment</button>
+      <button type="submit" class="waves-effect waves-light btn-large">Post</button>
     </form>
     <% if current_user.id == @trip.user_id %>
       <center>
       <h3>Add a Place:</h3>
         <div class="row">
-          <form class="col s12" action="/places" method="POST">
+          <form class="col s9" action="/places" method="POST">
             <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-            <input name = 'place[trip_id]' value = "<%= @trip.id %>" type = 'hidden'>
+            <input name = "place[trip_id]" value = "<%= @trip.id %>" type = 'hidden'>
             <div class="container">
             <div class="row">
-              <div class="input-field col s12">
+              <div class="input-field col s9">
                 <i class="material-icons prefix">language</i>
                 <input id="icon_prefix" type="text" class="validate" name="place[location]">
                 <label for="icon_prefix">Location</label>
               </div><br>
-              <div class="input-field col s12">
+              <div class="input-field col s9">
                 <i class="material-icons prefix">mode_edit</i>
                 <input id="icon_telephone" type="tel" class="validate" name="place[description]">
                 <label for="icon_telephone">Description</label>
               </div>
-              <div class="input-field col s12">
+              <div class="input-field col s9">
                 <i class="material-icons prefix">toc</i>
-                <input id="date" type="date" class="datepicker" name="place[date]">
+                <input id="date" type="date" class="datepicker" name="place[datetime]">
                 <label for="date">Date</label>
               </div>
             </div>
@@ -207,14 +176,7 @@
             <button type="submit" class="waves-effect waves-light btn-large">Add Place</button>
           </form>
         </div>
-    <% end %>
-<hr>
-<div class = "container">
-	</table>
-
-
-
-
+  <div class="row">
   <form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
     <input type = 'hidden' name = '_method' value = 'patch'>
@@ -229,43 +191,36 @@
       <button class="btn" type="submit">Add Trip Picture</button>
     </div>
   </form>
+  </div>
+    <% end %>
 
-<!-- 	<form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-    <div class="file-field input-field">
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	    <input type = 'hidden' name = '_method' value = 'patch'>
-	     <label for="picture_picture">Picture</label>
-	    <input type="file" name="trip[picture]" id="picture_picture">
-	    <br>
-      <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Add Trip Picture</a>
-	    <input type="submit" value="Add Trip Cover Picture">
-	 </div>
-  </form>
- -->
-	<% count = 0 %>
-	<% @places.each do |p| %>
-	<% count += 1 %>
-	<h3>Place #<%= count %></h3>
-	<table>
-		<% if @picture = Picture.find_by(place_id: p.id) %>
-		<div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
-		<% end %>
-		<tr>
-			<td>Location:</td>
-			<td id = 'location_<%= count %>'><%= p.location %></td>
-		</tr>
-		<tr>
-			<td>Description:</td>
-			<td><%= p.description %></td>
-		</tr>
-		<tr>
-			<td>Date:</td>
-			<td><%= p.datetime %> </td>
-		</tr>
-	</table>
-	<% end %>
+<div class = "container">
+  </table>
+
+  <% count = 0 %>
+  <% @places.each do |p| %>
+  <% count += 1 %>
+  <a href="/places/<%= p.id %>"><h3>Place #<%= count %></h3></a>
+  <table>
+    <% if @picture = Picture.find_by(place_id: p.id) %>
+    <div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
+    <% end %>
+    <tr>
+      <td>Location:</td>
+      <td id = "location_<%= count %>"><%= p.location %></td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td><%= p.description %></td>
+    </tr>
+    <tr>
+      <td>Date:</td>
+      <td><%= p.datetime.to_date %> </td>
+    </tr>
+  </table>
+  <% end %>
 </div>
-<!-- <footer class="page-footer"> -->
+
 
   </div>
 </section>
@@ -276,11 +231,7 @@
   </div>
 </section>
 
-<!-- <section class="module content">
-  <div class="container">
 
-  </div>
-</section> -->
 
 
 </body>
