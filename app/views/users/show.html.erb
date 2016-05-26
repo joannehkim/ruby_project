@@ -1,160 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//cdn.muicss.com/mui-0.6.0/css/mui.min.css" rel="stylesheet" type="text/css" />
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//cdn.muicss.com/mui-0.6.0/css/mui.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+  <script src="//cdn.muicss.com/mui-0.6.0/js/mui.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
-    <script src="//cdn.muicss.com/mui-0.6.0/js/mui.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-          
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <style>
-
-/**
- * Body CSS
- */
-html,
-body {
-  height: 100%;
-  background-color: #fffeef;
-}
-html,
-body,
-input,
-textarea,
-buttons {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-}
-/**
- * Layout CSS
- */
-#header {
-  background-color: #5F9EA0;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 2;
-  transition: left 0.2s;
-}
-#sidedrawer {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 200px;
-  left: -200px;
-  overflow: auto;
-  z-index: 2;
-  background-color: #5F9EA0;
-  transition: transform 0.2s;
-}
-#content-wrapper {
-  min-height: 100%;
-  overflow-x: hidden;
-  margin-left: 0px;
-  transition: margin-left 0.2s;
-  /* sticky bottom */
-  margin-bottom: -160px;
-  padding-bottom: 160px;
-}
-#footer {
-  height: 160px;
-  margin-left: 0px;
-  transition: margin-left 0.2s;
-}
-@media (min-width: 768px) {
-  #header {
-    left: 200px;
-  }
-  #sidedrawer {
-    transform: translate(200px);
-  }
-  #content-wrapper {
-    margin-left: 200px;
-  }
-  #footer {
-    margin-left: 200px;
-  }
-  body.hide-sidedrawer #header {
-    left: 0;
-  }
-  body.hide-sidedrawer #sidedrawer {
-    transform: translate(0px);
-  }
-  body.hide-sidedrawer #content-wrapper {
-    margin-left: 0;
-  }
-  body.hide-sidedrawer #footer {
-    margin-left: 0;
-  }
-}
-/**
- * Toggle Side drawer
- */
-#sidedrawer.active {
-  transform: translate(200px);
-}
-/**
- * Header CSS
- */
-.sidedrawer-toggle {
-  color: #fff;
-  cursor: pointer;
-  font-size: 20px;
-  line-height: 20px;
-  margin-right: 10px;
-}
-.sidedrawer-toggle:hover {
-  color: #fff;
-  text-decoration: none;
-}
-/**
- * Footer CSS
- */
-#footer {
-  background-color: #5F9EA0;
-  color: #fff;
-}
-#footer a {
-  color: #fff;
-  text-decoration: underline;
-}
-/**
- * Side drawer CSS
- */
-#sidedrawer-brand {
-  padding-left: 20px;
-}
-#sidedrawer ul {
-  list-style: none;
-}
-#sidedrawer > ul {
-  padding-left: 0px;
-}
-#sidedrawer > ul > li:first-child {
-  padding-top: 15px;
-}
-#sidedrawer strong {
-  display: block;
-  padding: 15px 22px;
-  cursor: pointer;
-}
-#sidedrawer strong:hover {
-  background-color: #5F9EA0;
-}
-#sidedrawer strong + ul > li {
-  padding: 6px 0px;
-}
+  <style type="text/css">
+/*    
+      #navbarrr{
+        position: fixed;
+        width: 100%;
+      }*/
+      nav{
+        margin-top: 0px;
+        position: fixed;
+        background-color: #5F9EA0;
+        z-index: 99;
+      }
       .nav{
         height:60px;
         width:auto;
         background-color: #5F9EA0;
+
       }
       .fixed{
         height:60px;
@@ -173,7 +48,7 @@ buttons {
         max-height: 100%;
         background-size: 100%;
         width: 700px;
-        height: 400px;
+        height: 350px;
         color:white;
         font-weight: bold;
         font-size: 50px;
@@ -184,9 +59,10 @@ buttons {
         height: 100%;
         width: 560px;
         display: inline-block;
-        vertical-align: top;
+        vertical-align: baseline;
         background-color: #CCC;
         position: fixed;
+        overflow:hidden;
       }
       #map{
         height: 100%;
@@ -213,6 +89,7 @@ buttons {
       }
       .mui-container-fluid{
         padding:0px;
+        height: auto;
       }
       .resizeimg{
         border-radius: 50%;
@@ -226,92 +103,75 @@ buttons {
         text-decoration: none;
         color: white;
       }
-    </style>
-
-
-    <script>
-
-jQuery(function($) {
-  var $bodyEl = $('body'),
-      $sidedrawerEl = $('#sidedrawer');
-  function showSidedrawer() {
-    // show overlay
-    var options = {
-      onclose: function() {
-        $sidedrawerEl
-          .removeClass('active')
-          .appendTo(document.body);
+      .favorites{
+        height:100px;
+        width: 200px;
+        border: 1px solid black;
+        padding: 15px;
+        content-align: center;
+        margin: 10px 40px 10px 250px;
       }
-    };
-    var $overlayEl = $(mui.overlay('on', options));
-    // show element
-    $sidedrawerEl.appendTo($overlayEl);
-    setTimeout(function() {
-      $sidedrawerEl.addClass('active');
-    }, 20);
-  }
-  function hideSidedrawer() {
-    $bodyEl.toggleClass('hide-sidedrawer');
-  }
-  $('.js-show-sidedrawer').on('click', showSidedrawer);
-  $('.js-hide-sidedrawer').on('click', hideSidedrawer);
-});
-var $titleEls = $('strong', $sidedrawerEl);
-$titleEls
-  .next()
-  .hide();
-$titleEls.on('click', function() {
-  $(this).next().slideToggle(200);
-});
-    </script>
-  </head>
-  <body>
-<div id="sidedrawer" class="mui--no-user-select">
-<div id="sidedrawer-brand" class="mui--appbar-line-height mui--text-title" style="text-align: center">Profile</div>
-<div class="mui-divider"></div>
-<ul>
-<li><img src="/assets/cap.png" class='resizeimg'></li>
-  <li>
-    <strong style="text-align: center"><%= current_user.first_name %> <%= current_user.last_name %></strong>
-  </li>
-  <li style="text-align: center"><%= current_user.email %></li>
-</ul>
+      #wrapIt{
+        margin-top: 64px;
+      }
+
+
+
+
+
+  </style>
+
+</head>
+<body>
+
+<!-- <div id="navbarrr">
+  <header id="header">
+    <div class="mui-appbar mui--appbar-line-height">
+      <div class="bgcolor">
+      <div class="mui-container-fluid">
+        <a class="logo" href="/">Compass</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="/sessions/<%= current_user.id %>" data-method="delete">Logout</a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </header>
 </div>
-<header id="header">
-  <div class="mui-appbar mui--appbar-line-height">
-    <div class="bgcolor">
-    <div class="mui-container-fluid">
-      <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">☰</a>
-      <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">☰</a>
+ -->
 
-      <a class="logo" href="">Compass</a>
+  <nav>
+    <div class="nav-wrapper ">
+      <a href="/" class="brand-logo">Compass</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/trips/new">Create a Trip</a></li>
+        <li><a href="collapsible.html">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
 
-      <span class="mui--text-title mui--visible-xs-inline-block">User Name</span>
-    </div>
-    </div>
-  </div>
-</header>
-<div id="content-wrapper">
-<div class="mui--appbar-height"></div>
+
+
 <div class="mui-container-fluid">
 
-
-
-
+<div id="wrapIt">
 
 <div id="container">
+
+
+
 
 
     <div class="profileLocation">
       <img class="profileLocation" src="/assets/newyork.jpg">
     </div>
 
-    <br>
-    <br>
-    <div id="button">
-    <a href="/trips/new" class="waves-effect waves-light btn-large">Create a Trip!</a>
-    </div>
-    <br>
+      <div class="favorites">
+        <p><i class="material-icons prefix">loyalty</i> Favorites: 69 </p>  
+        <p><i class="material-icons prefix">perm_contact_calendar</i> Places Visited: 100</p> 
+      </div>
 
 
     <div class="usersList">
@@ -338,7 +198,8 @@ $titleEls.on('click', function() {
 
 </div>
 
-  <div id="fixed_map">
+  
+  <div id="fixed_map" class='map-responsive'>
     <div id="map">
       <script>
         function initMap() {
@@ -360,14 +221,16 @@ $titleEls.on('click', function() {
 </div>
 
 
+
+
+
+
 </div>
-<!-- <footer id="footer">
-  <div class="mui-container-fluid">
-    <br>
-    Made with ♥ by <a href="https://www.muicss.com">MUI</a>
-  </div>
-</footer> -->
 
 
-  </body>
+
+
+
+
+</body>
 </html>
