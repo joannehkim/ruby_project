@@ -13,6 +13,27 @@
   });
   });
   </script>
+
+<style>
+ #fixed_map{
+       height: 400px;
+       width: 560px;
+       display: inline-block;
+       vertical-align: top;
+       background-color: #CCC;
+       /*position: fixed;  */
+     }
+     #map{
+       height: 400px;
+       width: 560px;
+       border: 1px solid black;
+       display: inline-block;
+       vertical-align: top;
+       background-color: #CCC;
+       /*position: absolute;*/
+     }
+ </style>
+
 </head>
 <body>
 
@@ -30,7 +51,7 @@
           </tr>
           <tr>
               <th data-field="id">Destination</th>
-              <td><%= @trip.destination %></td>
+              <td id = 'destination'><%= @trip.destination %></td>
           </tr>
           <tr>
               <th data-field="id">Description</th>
@@ -41,6 +62,64 @@
               <td><%= @trip.start_date.to_date %> ~ <%= @trip.end_date.to_date %></td>
           </tr>
         </thead>
+
+        <div id="fixed_map">
+               <div id="map">
+                 <% count = 0 %>
+                 <script>
+                   var places = []
+                 </script>
+                 <% @places.each do |p| %>
+                 <script> places.push("<%= p.location %>")</script>
+                 <% end %>
+                 <script>
+
+                   function initMap() {
+                     console.log(places)
+
+                     var geocoder = new google.maps.Geocoder();
+                     var address = document.getElementById('destination').innerHTML
+                     var trip_location = geocoder.geocode({'address': address}, function(results, status){
+                       if (status == google.maps.GeocoderStatus.OK) {
+                         map.setCenter(results[0].geometry.location);
+                         var marker = new google.maps.Marker({
+                             map: map,
+                             position: results[0].geometry.location
+                         });
+                       } else {
+                         alert("Geocode was not successful for the following reason: " + status);
+                       }
+                    });
+                     var labels = "123456789";
+                     var labelind = 0;
+                     for (var i = 0; i<places.length; i++){
+                       var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
+                         if (status == google.maps.GeocoderStatus.OK) {
+
+                           var marker = new google.maps.Marker({
+                               map: map,
+                               position: results[0].geometry.location,
+                               label: labels[labelind++]
+                           });
+                         } else {
+                           alert("Geocode was not successful for the following reason: " + status);
+                         }
+                     })};
+                     console.log(address)
+                     var mapDiv = document.getElementById('map');
+                     var map = new google.maps.Map(mapDiv, {
+                       zoom: 10
+                     });
+                   }
+
+                 </script>
+                 <script async defer
+                   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
+                 </script>
+                 
+               </div>
+             </div>
+
           <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
 		    <form action='/likes' method='POST'>
 		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
@@ -132,7 +211,7 @@
 		<% end %>
 		<tr>
 			<td>Location:</td>
-			<td><%= p.location %></td>
+			<td id = "location_<%= count %>"><%= p.location %></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
