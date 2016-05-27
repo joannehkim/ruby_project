@@ -15,7 +15,7 @@
   </script>
 
 <style>
- #fixed_map{
+    #fixed_map{
        height: 400px;
        width: 560px;
        display: inline-block;
@@ -32,13 +32,16 @@
        background-color: #CCC;
        /*position: absolute;*/
      }
-           nav{
+    nav{
         margin-top: -600px;
         position: fixed;
         background-color: #5F9EA0;
         z-index: 99;
         position:absolute;
       }
+    .destination {
+      text-transform: uppercase;
+    }
  </style>
 
 </head>
@@ -55,35 +58,17 @@
     </div>
   </nav>
 
-
-
-
 <section class="module content">
-  <div class="container">
-      <table>
-        <thead>
-          <% if @trip.picture_file_name %>
-        <h3>Trip Album Cover</h3>
-        <div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
-      <% end %>
-          <tr>
-              <th data-field="id">Name</th>
-              <td><%= @trip.user.first_name %> <%= @trip.user.last_name %></td>
-          </tr>
-          <tr>
-              <th data-field="id">Destination</th>
-              <td id = 'destination'><%= @trip.destination %></td>
-          </tr>
-          <tr>
-              <th data-field="id">Description</th>
-              <td><%= @trip.description %></td>
-          </tr>
-          <tr>
-              <th data-field="id">Trip Date</th>
-              <td><%= @trip.start_date.to_date %> ~ <%= @trip.end_date.to_date %></td>
-          </tr>
-        </thead>
 
+<div class="row">
+      <div class="col s6">
+          <% if @trip.picture_file_name %>
+             <h3 class="destination"><%= @trip.destination %></h3>
+             <div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
+           <% end %>
+      </div>
+      <div class="col s6">
+        <h3 class="destination">LOCATION</h3>
         <div id="fixed_map">
                <div id="map">
                  <% count = 0 %>
@@ -137,6 +122,30 @@
                  
                </div>
              </div>
+      </div>
+    </div>
+
+  <div class="container">
+      <table>
+        <thead>
+          <tr>
+              <th data-field="id">Name</th>
+              <td><%= @trip.user.first_name %> <%= @trip.user.last_name %></td>
+          </tr>
+          <tr>
+              <th data-field="id">Destination</th>
+              <td id = 'destination'><%= @trip.destination %></td>
+          </tr>
+          <tr>
+              <th data-field="id">Description</th>
+              <td><%= @trip.description %></td>
+          </tr>
+          <tr>
+              <th data-field="id">Trip Date</th>
+              <td><%= @trip.start_date.to_date %> ~ <%= @trip.end_date.to_date %></td>
+          </tr>
+
+        </thead>
 
           <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
         <form action='/likes' method='POST'>
@@ -157,30 +166,49 @@
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
 
-    <h4>Comments:</h4>
+        <div class="container">
+  <form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type = 'hidden' name = '_method' value = 'patch'>
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+      <input type="file" name="trip[picture]" id="picture_picture">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div><br>
+    </div>
+    <center><button class="btn" type="submit">Add Trip Picture</button></center><br>
+  </form>
+  </div>
+
+  <br><br><hr>
+
+    <h4>Comments about this trip:</h4>
     <% @comments.each do |c| %>
       <%= c.content %><br>
-      - <%= c.user.first_name %>
+      - <span class="bold"><%= c.user.first_name %></span><br><br>
     <% end %>
     <form action='/comments' method='POST'>
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input name = "comment[content]" type = 'text' value='Add a Comment'>
+      <input name = "comment[content]" type = 'text' id= 'comment' value='Write a Comment...'><br>
       <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
       <input name="comment[commentable_type]" value="Trip" type="hidden">
 
-      <button type="submit" class="waves-effect waves-light btn-large">Add a New Comment</button>
-      <button type="submit" class="waves-effect waves-light btn-large">Post</button>
-
+      <button type="submit" class="btn">Add a New Comment</button><br><br>
     </form>
+
+    <hr>
     <% if current_user.id == @trip.user_id %>
-      <center>
-      <h3>Add a Place:</h3>
-        <div class="row">
-          <form class="col s9" action="/places" method="POST">
+      <h3>Add a Place in <%= @trip.destination %>:</h3>
+        <div class="container">
+
+          <form action="/places" method="POST">
             <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-            <input name = "place[trip_id]" value = "<%= @trip.id %>" type = 'hidden'>
+            <input name = "place[trip_id]" value = "<%= @trip.id %>" type = 'hidden' class='place_form'>
             <div class="container">
-            <div class="row">
+            
               <div class="input-field col s9">
                 <i class="material-icons prefix">language</i>
                 <input id="icon_prefix" type="text" class="validate" name="place[location]">
@@ -198,27 +226,13 @@
               </div>
             </div>
             </div>
-            <button type="submit" class="waves-effect waves-light btn-large">Add Place</button>
-          </form>
+            <button type="submit" class="btn">Add Place</button><br><br>
+          </form><hr>
+          </div>
         </div>
-  <div class="row">
-  <form class="new_picture" id="new_picture" enctype="multipart/form-data" action="/trips/<%= @trip.id %>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-    <input type = 'hidden' name = '_method' value = 'patch'>
-    <div class="file-field input-field">
-      <div class="btn">
-        <span>File</span>
-      <input type="file" name="trip[picture]" id="picture_picture">
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
-      <button class="btn" type="submit">Add Trip Picture</button>
-    </div>
-  </form>
-  </div>
     <% end %>
-<div class = "container">
+
+    <div class = "container">
 
   <% count = 0 %>
   <% @places.each do |p| %>
@@ -244,6 +258,7 @@
   <% end %>
   </div>
 </section>
+
 
 <section class="module parallax parallax-3">
   <div class="container"><br>

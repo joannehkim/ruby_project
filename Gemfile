@@ -24,7 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'hirb'
-gem 'rails-footnotes', '>= 4.0.0', '<5'
+# gem 'rails-footnotes', '>= 4.0.0', '<5'
 
 gem 'sprockets-rails', '~> 3.0.4'
 gem 'materialize-sass'
