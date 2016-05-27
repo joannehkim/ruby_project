@@ -6,6 +6,8 @@ class PlacesController < ApplicationController
   end
 
   def create
+    # @place = Place.new(location: place_params[:location], trip_id: params[:id], description: place_params[:description], datetime: place_params[:datetime])
+    # @place.trip_id = params[:id]
     @place = Place.new(place_params)
     if @place.save
       redirect_to :back
@@ -13,6 +15,7 @@ class PlacesController < ApplicationController
       flash[:errors] = @place.errors.full_messages
       redirect_to :back
     end
+
   end
 
   def show
@@ -24,6 +27,8 @@ class PlacesController < ApplicationController
     @costs = Cost.where(place_id: params[:id])
     @total_cost = @costs.sum(:cost)
     @comments = Comment.where(commentable_type: "Place", commentable_id: @place.id)
+    @place_like = Like.find_by(user_id: current_user.id, likeable_id: @place.id, likeable_type: "Place")
+    
 
   end
 

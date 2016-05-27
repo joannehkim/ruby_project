@@ -75,6 +75,7 @@
                  <script>
                    function initMap() {
                      console.log(places)
+
                      var geocoder = new google.maps.Geocoder();
                      var address = document.getElementById('destination').innerHTML
                      var trip_location = geocoder.geocode({'address': address}, function(results, status){
@@ -193,7 +194,6 @@
   </form>
   </div>
     <% end %>
-
 <div class = "container">
   </table>
 
@@ -219,6 +219,32 @@
     </tr>
   </table>
   <% end %>
+
+<div class = "container">
+	</table>
+
+	<% count = 0 %>
+	<% @places.each do |p| %>
+	<% count += 1 %>
+	<a href="/places/<%= p.id %>"><h3>Place #<%= count %></h3></a>
+	<table>
+		<% if @picture = Picture.find_by(place_id: p.id) %>
+		<div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
+		<% end %>
+		<tr>
+			<td>Location:</td>
+			<td id = "location_<%= count %>"><%= p.location %></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><%= p.description %></td>
+		</tr>
+		<tr>
+			<td>Date:</td>
+			<td><%= p.datetime.to_date %> </td>
+		</tr>
+	</table>
+	<% end %>
 </div>
 
 

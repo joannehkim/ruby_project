@@ -14,7 +14,6 @@ class TripsController < ApplicationController
   end
 
   def create
-    fail
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
     if @trip.save
@@ -55,7 +54,7 @@ class TripsController < ApplicationController
   end
   private
     def trip_params
-      params.require(:trip).permit(:destination, :start_date, :end_date, :user_id, :description, :picture)
+      params.require(:trip).permit(:destination, :start_date, :end_date, :user_id, :description)
     end
 end
 
