@@ -115,32 +115,11 @@
         margin-top: 64px;
       }
 
-
-
-
-
   </style>
 
 </head>
 <body>
 
-<!-- <div id="navbarrr">
-  <header id="header">
-    <div class="mui-appbar mui--appbar-line-height">
-      <div class="bgcolor">
-      <div class="mui-container-fluid">
-        <a class="logo" href="/">Compass</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a href="/sessions/<%= current_user.id %>" data-method="delete">Logout</a>
-          </li>
-        </ul>
-      </div>
-      </div>
-    </div>
-  </header>
-</div>
- -->
 
   <nav>
     <div class="nav-wrapper ">
@@ -192,15 +171,11 @@
 </div>
 
 
-
-
-
-
         <div id="fixed_map">
                <div id="map">
                  <% count = 0 %>
                  <script>
-                   var places = []
+                   var places = [];
                  </script>
                  <% @places.each do |p| %>
                  <script> places.push("<%= p.destination %>")</script>
@@ -228,7 +203,8 @@
                    
                      var mapDiv = document.getElementById('map');
                      var map = new google.maps.Map(mapDiv, {
-                       zoom: 11
+                      center: {lat: -34.397, lng: 150.644},
+                       zoom: 2
                      });
                    }
                  </script>
@@ -238,7 +214,7 @@
                 
        </div>
   </div>
-
-
+</div>
+</div>
 </body>
 </html>
