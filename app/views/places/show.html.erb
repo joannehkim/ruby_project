@@ -6,14 +6,40 @@
 </head>
 
 <style>
+  *{
+    margin:0px;
+    padding:10px 0px;
+  }
+
   img{
     height:400px;
   }
+  nav{
+  margin-top: -32px;
+  padding:10px 0px;
+  position: fixed;
+  background-color: #5F9EA0;
+  z-index: 99;
+  }
+  .container{
+    padding: 50px;
+  }
+
 </style>
 
 <body>
 
-<div class = "container">
+  <nav>
+    <div class="nav-wrapper ">
+      <a href="/" class="brand-logo">Compass</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/trips/new">Create a Trip</a></li>
+        <li><a href="/sessions/<%=params[:id]%>" data-method='delete'>Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class = "container">
   <div>
   <!-- Place name & Like Place -->
     <h1><%= @place.location %></h1>
@@ -160,7 +186,6 @@
     </div>
   </div>
 </div>
-
 
 
 </body>
