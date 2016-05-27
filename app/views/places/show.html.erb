@@ -17,8 +17,8 @@
   <div>
   <!-- Place name & Like Place -->
     <h1><%= @place.location %></h1>
-    <% if Like.find_by(user_id: current_user.id, likeable_id: @place.id, likeable_type: "Place") %>
-		<form action='/likes' method='POST'>
+    <% if @place_like %>
+		<form action='/likes/<%= @place_like.id %>' method='POST'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<input name = "_method" value = 'delete' type = 'hidden'>
 			<input name="likeable_id" value="<%= @place.id %>" type="hidden">
@@ -47,8 +47,8 @@
                 <span class="card-title"><%= p.description %></span>
               </div>
               <div class="card-action">
-              <% if Like.find_by(user_id: current_user.id, likeable_id: p.id, likeable_type: "Picture") %>
-				<form action='/likes' method='POST'>
+              <% if @picture_like = Like.find_by(user_id: current_user.id, likeable_id: p.id, likeable_type: "Picture")%>
+				<form action='/likes/<%= @picture_like.id %>' method='POST'>
 					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 					<input name = "_method" value = 'delete' type = 'hidden'>
 					<input name="likeable_id" value="<%= p.id %>" type="hidden">
@@ -59,7 +59,7 @@
 				<form action='/likes' method='POST'>
 					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 					<input name="likeable_id" value="<%= p.id %>" type="hidden">
-					<input name="likeable_type" value="Trip" type="hidden">
+					<input name="likeable_type" value="Picture" type="hidden">
 					<button type="submit" class="btn">Like</button>
 				</form>
               <% end %>
@@ -103,8 +103,8 @@
             <td><%= c.company %></td>
             <td><%= c.description %></td>
             <td>
-             <% if Like.find_by(user_id: current_user.id, likeable_id: c.id, likeable_type: "Cost") %>
-              <form action='/likes' method='POST'>
+             <% if @cost_like = Like.find_by(user_id: current_user.id, likeable_id: c.id, likeable_type: "Cost") %>
+              <form action='/likes/<%= @cost_like.id %>' method='POST'>
                 <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
                 <input name = "_method" value = 'delete' type = 'hidden'>
                 <input name="likeable_id" value="<%= c.id %>" type="hidden">

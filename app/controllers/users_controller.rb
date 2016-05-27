@@ -18,6 +18,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @UT = Trip.where(user_id: @user.id )
+    @likes = Like.where(user_id: current_user.id).count
+
+
   end
   def update
     @user = User.find(params[:id])

@@ -27,6 +27,8 @@ class PlacesController < ApplicationController
     @costs = Cost.where(place_id: params[:id])
     @total_cost = @costs.sum(:cost)
     @comments = Comment.where(commentable_type: "Place", commentable_id: @place.id)
+    @place_like = Like.find_by(user_id: current_user.id, likeable_id: @place.id, likeable_type: "Place")
+    
 
   end
 

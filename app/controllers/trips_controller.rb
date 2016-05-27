@@ -5,16 +5,14 @@ class TripsController < ApplicationController
   end
 
   def to_destination
-    destination = params[:id].gsub("_", " ")
-    @trips = Trip.most_liked(destination)
-    @destination = Trip.find_by(destination: destination).destination
+    @destination = params[:id].gsub("_", " ")
+    @trips = Trip.most_liked(@destination)
   end
 
   def new
   end
 
   def create
-    # fail
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
     if @trip.save
