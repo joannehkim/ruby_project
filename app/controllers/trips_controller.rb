@@ -5,9 +5,8 @@ class TripsController < ApplicationController
   end
 
   def to_destination
-    destination = params[:id].gsub("_", " ")
-    @trips = Trip.most_liked(destination)
-    @destination = Trip.find_by(destination: destination).destination
+    @destination = params[:id].gsub("_", " ")
+    @trips = Trip.most_liked(@destination)
   end
 
   def new
@@ -54,7 +53,7 @@ class TripsController < ApplicationController
   end
   private
     def trip_params
-      params.require(:trip).permit(:destination, :start_date, :end_date, :user_id, :description)
+      params.require(:trip).permit(:destination, :start_date, :end_date, :user_id, :description, :picture)
     end
 end
 

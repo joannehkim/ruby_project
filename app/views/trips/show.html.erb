@@ -41,10 +41,10 @@
   <div class="container">
       <table>
         <thead>
-        	<% if @trip.picture_file_name %>
-				<h3>Trip Album Cover</h3>
-				<div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
-			<% end %>
+          <% if @trip.picture_file_name %>
+        <h3>Trip Album Cover</h3>
+        <div class = 'place_image'><%= image_tag @trip.picture.url  %></div>
+      <% end %>
           <tr>
               <th data-field="id">Name</th>
               <td><%= @trip.user.first_name %> <%= @trip.user.last_name %></td>
@@ -73,7 +73,6 @@
                  <script> places.push("<%= p.location %>")</script>
                  <% end %>
                  <script>
-
                    function initMap() {
                      console.log(places)
 
@@ -95,7 +94,6 @@
                      for (var i = 0; i<places.length; i++){
                        var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
                          if (status == google.maps.GeocoderStatus.OK) {
-
                            var marker = new google.maps.Marker({
                                map: map,
                                position: results[0].geometry.location,
@@ -111,7 +109,6 @@
                        zoom: 10
                      });
                    }
-
                  </script>
                  <script async defer
                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
@@ -121,21 +118,21 @@
              </div>
 
           <% if Like.find_by(user_id: current_user.id, likeable_id: @trip.id, likeable_type: "Trip") %>
-		    <form action='/likes' method='POST'>
-		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		      <input name = "_method" value = 'delete' type = 'hidden'>
-		      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
-		      <input name="likeable_type" value= "Trip" type="hidden">
-		      <input type="submit" value="Unlike">
-		    </form>
-		  <% else %>
-		    <form action='/likes' method='POST'>
-		      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		      <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
-		      <input name="likeable_type" value="Trip" type="hidden">
-		      <input type="submit" value="Like">
-		    </form>
-		  <% end %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name = "_method" value = 'delete' type = 'hidden'>
+          <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+          <input name="likeable_type" value= "Trip" type="hidden">
+          <input type="submit" value="Unlike">
+        </form>
+      <% else %>
+        <form action='/likes' method='POST'>
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input name="likeable_id" value="<%= @trip.id %>" type="hidden">
+          <input name="likeable_type" value="Trip" type="hidden">
+          <input type="submit" value="Like">
+        </form>
+      <% end %>
   <b>There are <%= Like.where(likeable_type: "Trip", likeable_id: @trip.id).count %> users who like this trip.</b>
       </table>
 
@@ -149,7 +146,10 @@
       <input name = "comment[content]" type = 'text' value='Add a Comment'>
       <input name="comment[commentable_id]" value="<%= @trip.id %>" type="hidden">
       <input name="comment[commentable_type]" value="Trip" type="hidden">
+
+      <button type="submit" class="waves-effect waves-light btn-large">Add a New Comment</button>
       <button type="submit" class="waves-effect waves-light btn-large">Post</button>
+
     </form>
     <% if current_user.id == @trip.user_id %>
       <center>
@@ -197,35 +197,30 @@
   </form>
   </div>
     <% end %>
-
 <div class = "container">
-	</table>
 
-	<% count = 0 %>
-	<% @places.each do |p| %>
-	<% count += 1 %>
-	<a href="/places/<%= p.id %>"><h3>Place #<%= count %></h3></a>
-	<table>
-		<% if @picture = Picture.find_by(place_id: p.id) %>
-		<div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
-		<% end %>
-		<tr>
-			<td>Location:</td>
-			<td id = "location_<%= count %>"><%= p.location %></td>
-		</tr>
-		<tr>
-			<td>Description:</td>
-			<td><%= p.description %></td>
-		</tr>
-		<tr>
-			<td>Date:</td>
-			<td><%= p.datetime.to_date %> </td>
-		</tr>
-	</table>
-	<% end %>
-</div>
-
-
+  <% count = 0 %>
+  <% @places.each do |p| %>
+  <% count += 1 %>
+  <a href="/places/<%= p.id %>"><h3>Place #<%= count %></h3></a>
+  <table>
+    <% if @picture = Picture.find_by(place_id: p.id) %>
+    <div class = 'place_image'><%= image_tag @picture.picture.url %></div> 
+    <% end %>
+    <tr>
+      <td>Location:</td>
+      <td id = "location_<%= count %>"><%= p.location %></td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td><%= p.description %></td>
+    </tr>
+    <tr>
+      <td>Date:</td>
+      <td><%= p.datetime.to_date %> </td>
+    </tr>
+  </table>
+  <% end %>
   </div>
 </section>
 
