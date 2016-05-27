@@ -32,10 +32,31 @@
        background-color: #CCC;
        /*position: absolute;*/
      }
+           nav{
+        margin-top: -600px;
+        position: fixed;
+        background-color: #5F9EA0;
+        z-index: 99;
+        position:absolute;
+      }
  </style>
 
 </head>
 <body>
+
+
+  <nav>
+    <div class="nav-wrapper ">
+      <a href="/" class="brand-logo">Compass</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/users/<%=current_user.id%>">My Compass</a></li>
+        <li><a href="/sessions/<%=params[:id]%>" data-method='delete'>Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
 
 <section class="module content">
   <div class="container">
