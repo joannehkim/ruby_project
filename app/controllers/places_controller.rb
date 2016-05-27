@@ -33,6 +33,7 @@ class PlacesController < ApplicationController
   end
 
   def edit
+    @place = Place.find(params[:id])
   end
 
   def update
@@ -46,6 +47,13 @@ class PlacesController < ApplicationController
   end
 
   def destroy
+    @place = Place.find(params[:id])
+    if @place.destroy(trip_params)
+      redirect_to "/place/#{@place.id}"
+    else
+      flash[:errors] = @place.errors.full_messages
+      redirect_to :back
+    end
   end
 
 private

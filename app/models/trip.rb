@@ -1,8 +1,8 @@
 class Trip < ActiveRecord::Base
   belongs_to :user
-  has_many :comments, :as => :commentable
-  has_many :likes, :as => :likeable
-  has_many :places
+  has_many :comments, :as => :commentable, dependent: :destroy
+  has_many :likes, :as => :likeable, dependent: :destroy
+  has_many :places, dependent: :destroy
 
   validates :destination, :description, :start_date, :end_date, presence: true
 

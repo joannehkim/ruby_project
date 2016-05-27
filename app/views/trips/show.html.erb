@@ -228,6 +228,12 @@
             </div>
             <button type="submit" class="btn">Add Place</button><br><br>
           </form><hr>
+          <form action="/trips/<%= @trip.id %>" method="POST">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input name = "_method" value = "delete" type = 'hidden' class='place_form'>
+            <div class="container">
+            <button type="submit" class="btn">Delete this Trip</button><a href = "/trips/<%= @trip.id %>/edit"><button type="button" class="btn" href = "/trips/<%= @trip.id %>/edit">Edit this Trip</button></a><br><br>
+          </form><hr>
           </div>
         </div>
     <% end %>
