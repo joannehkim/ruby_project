@@ -25,6 +25,9 @@
   .container{
     padding: 50px;
   }
+  a:hover {
+    text-decoration: none;
+  }
 
 </style>
 
@@ -34,7 +37,7 @@
     <div class="nav-wrapper ">
       <a href="/" class="brand-logo">Compass</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/trips/new">Create a Trip</a></li>
+        <li><a href="/trips/new" class="">Create a Trip</a></li>
         <li><a href="/sessions/<%=params[:id]%>" data-method='delete'>Logout</a></li>
       </ul>
     </div>
@@ -63,12 +66,12 @@
   </div>
 
   <div class="row">
-    <div class="col s5 push-s7">
+    <div class="col s5">
       
       <div>
       <!-- upload photo, description, like photo -->
         <% @pictures.each do |p| %>
-            <div class="card large">bru
+            <div class="card large">
               <div class="card-image">
                 <%= image_tag p.picture.url %>
                 <span class="card-title"><%= p.description %></span>
@@ -105,17 +108,18 @@
       <% end %>
     </div>
 
-    <div class="col s7 pull-s5"> 
+    <div class="col s7">
+    <center>
       <div>
       <!-- Info about place -->
         <p>Description: <%= @place.description %></p>
-        <p>Total Cost: <%= @total_cost %></p>
-        <p>Date: <%= @place.datetime %></p>
+        <p>Total Cost: $<%= @total_cost %></p>
+        <p>Date: <%= @place.datetime.strftime("%B %d, %Y") %></p>
       <div>
 
       <div>
       <!-- Cost table, add associated cost -->
-        <h5>Costs Associated with This Place:</h5>
+        <h4>Costs Associated with This Place:</h4>
         <table>
           <tr>
             <th>Category</th>
@@ -142,13 +146,13 @@
               <form action='/likes' method='POST'>
                 <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
                 <input name="likeable_id" value="<%= c.id %>" type="hidden">
-                <input name="likeable_type" value="Cost" type="hidden">
+                <input name="likeable_type" value="Cost" type="hidden"><br>
 				<button type="submit" class="btn">Like</button>
               </form>
             <% end %>
           <% end %>
             </td>
-          </tr>
+          </tr><br>
         </table>
       </div>
 
