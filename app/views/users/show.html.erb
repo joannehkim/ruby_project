@@ -161,7 +161,7 @@
 
         <% @UT.each do | u | %>
           <div class="trips">
-            <a href=""><h3><%= u.destination %></h3></a>
+            <a href="/trips/<%=u.id%>"><h3><%= u.destination %></h3></a>
             <p><%= u.description %></p>
           </div>
         <% end %>
@@ -171,48 +171,48 @@
 </div>
 
 
-        <div id="fixed_map">
-               <div id="map">
-                 <% count = 0 %>
-                 <script>
-                   var places = [];
-                 </script>
-                 <% @places.each do |p| %>
-                 <script> places.push("<%= p.destination %>")</script>
-                 <% end %>
-                 <script>
-                   function initMap() {
-                     console.log(places)
+ <div id="fixed_map">
+   <div id="map">
+     <% count = 0 %>
+     <script>
+       var places = [];
+     </script>
+     <% @places.each do |p| %>
+     <script> places.push("<%= p.destination %>")</script>
+     <% end %>
+     <script>
+       function initMap() {
+         console.log(places)
 
-                     var geocoder = new google.maps.Geocoder();
-                     
-                     var labels = "123456789";
-                     var labelind = 0;
-                     for (var i = 0; i<places.length; i++){
-                       var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
-                         if (status == google.maps.GeocoderStatus.OK) {
-                           var marker = new google.maps.Marker({
-                               map: map,
-                               position: results[0].geometry.location,
-                               label: labels[labelind++]
-                           });
-                         } else {
-                           alert("Geocode was not successful for the following reason: " + status);
-                         }
-                     })};
-                   
-                     var mapDiv = document.getElementById('map');
-                     var map = new google.maps.Map(mapDiv, {
-                      center: {lat: -34.397, lng: 150.644},
-                       zoom: 2
-                     });
-                   }
-                 </script>
-                 <script async defer
-                   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
-                 </script>
-                
-       </div>
+         var geocoder = new google.maps.Geocoder();
+         
+         var labels = "123456789";
+         var labelind = 0;
+         for (var i = 0; i<places.length; i++){
+           var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
+             if (status == google.maps.GeocoderStatus.OK) {
+               var marker = new google.maps.Marker({
+                   map: map,
+                   position: results[0].geometry.location,
+                   label: labels[labelind++]
+               });
+             } else {
+               alert("Geocode was not successful for the following reason: " + status);
+             }
+         })};
+       
+         var mapDiv = document.getElementById('map');
+         var map = new google.maps.Map(mapDiv, {
+          center: {lat: -34.397, lng: 150.644},
+           zoom: 2
+         });
+       }
+     </script>
+     <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
+     </script>
+    
+     </div>
   </div>
 </div>
 </div>
