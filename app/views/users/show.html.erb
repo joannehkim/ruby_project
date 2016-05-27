@@ -38,7 +38,7 @@
         position: fixed;
       }
       #container{
-        width: 700px;
+        width: 880px;
         display: inline-block;
       }
       .profileLocation{
@@ -47,8 +47,8 @@
         max-width: 100%;
         max-height: 100%;
         background-size: 100%;
-        width: 700px;
-        height: 350px;
+        width: 880px;
+        height: 490px;
         color:white;
         font-weight: bold;
         font-size: 50px;
@@ -60,9 +60,9 @@
         width: 560px;
         display: inline-block;
         vertical-align: baseline;
-        background-color: #CCC;
+        /*background-color: transparent;*/
         position: fixed;
-        overflow:hidden;
+       
       }
       #map{
         height: 100%;
@@ -70,7 +70,7 @@
         border: 1px solid black;
         display: inline-block;
         vertical-align: top;
-        background-color: #CCC;
+        /*background-color: transparent;*/
         position: absolute;
       }
       .usersList{
@@ -83,7 +83,7 @@
         border: 1px solid black;
         height: 200px;
         width: 400px;
-        margin: 50px 40px 50px 120px;
+        margin: 50px 40px 50px 220px;
         text-align: center;
         padding:40px 25px;
       }
@@ -109,7 +109,7 @@
         border: 1px solid black;
         padding: 15px;
         content-align: center;
-        margin: 10px 40px 10px 250px;
+        margin: 10px 40px 10px 335px;
       }
       #wrapIt{
         margin-top: 64px;
@@ -191,24 +191,54 @@
     </div>
 </div>
 
-  <div id="fixed_map" class='map-responsive'>
-    <div id="map">
-      <script>
-        function initMap() {
-          var mapDiv = document.getElementById('map');
-          var map = new google.maps.Map(mapDiv, {
-            center: {lat: 44.540, lng: -78.546},
-            zoom: 8
-          });
-        }
-      </script>
-      <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
-      </script>
-    </div>
+
+
+
+
+
+        <div id="fixed_map">
+               <div id="map">
+                 <% count = 0 %>
+                 <script>
+                   var places = []
+                 </script>
+                 <% @places.each do |p| %>
+                 <script> places.push("<%= p.destination %>")</script>
+                 <% end %>
+                 <script>
+                   function initMap() {
+                     console.log(places)
+
+                     var geocoder = new google.maps.Geocoder();
+                     
+                     var labels = "123456789";
+                     var labelind = 0;
+                     for (var i = 0; i<places.length; i++){
+                       var place_location = geocoder.geocode({'address': places[i]}, function(results, status){
+                         if (status == google.maps.GeocoderStatus.OK) {
+                           var marker = new google.maps.Marker({
+                               map: map,
+                               position: results[0].geometry.location,
+                               label: labels[labelind++]
+                           });
+                         } else {
+                           alert("Geocode was not successful for the following reason: " + status);
+                         }
+                     })};
+                   
+                     var mapDiv = document.getElementById('map');
+                     var map = new google.maps.Map(mapDiv, {
+                       zoom: 11
+                     });
+                   }
+                 </script>
+                 <script async defer
+                   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfWWMebSl09VdkaFt8D7yGnb5xUXi3A4&callback=initMap">
+                 </script>
+                
+       </div>
   </div>
-</div>
-</div>
+
 
 </body>
 </html>

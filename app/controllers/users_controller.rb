@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @UT = Trip.where(user_id: @user.id )
     @likes = Like.where(user_id: current_user.id).count
-
+    @places = Trip.where(user_id: @user.id)
 
   end
   def update
