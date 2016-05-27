@@ -7,7 +7,7 @@ class Trip < ActiveRecord::Base
   validates :destination, :description, :start_date, :end_date, presence: true
 
   before_save do
-  	self.destination.capitalize!
+  	self.destination.split.map(&:capitalize).join(' ')
   end
   	
   has_attached_file :picture
