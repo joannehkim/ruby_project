@@ -61,25 +61,49 @@
 <div id="places">
    <div class="row">
      <div class="col s4">
+      <% if current_user %>
        <a href="trips/Los_Angeles/to_destination"><img class="responsive-img" src="losangeles.png" alt="Los Angeles"></a>
+      <% else %>
+       <a class = "modal-trigger" href="#modal2" data-target = "#modal2"><img class="responsive-img" src="losangeles.png" alt="Los Angeles"></a>
+      <% end %>
      </div>
      <div class="col s4">
-      <a href="trips/Paris/to_destination"><img class="responsive-img" src="paris.png" alt="Paris"></a>
+      <% if current_user %>
+       <a href="trips/Paris/to_destination"><img class="responsive-img" src="paris.png" alt="Los Angeles"></a>
+      <% else %>
+       <a class = "modal-trigger" href="#modal2" data-target = "#modal2"><img class="responsive-img" src="paris.png" alt="Los Angeles"></a>
+      <% end %>
      </div>
      <div class="col s4">
+      <% if current_user %>
        <a href="trips/Chicago/to_destination"><img class="responsive-img" src="chicago.png" alt="Chicago"></a>
+      <% else %>
+       <a class = "modal-trigger" href="#modal2" data-target = "#modal2"><img class="responsive-img" src="chicago.png" alt="Chicago"></a>
+      <% end %>
      </div>
    </div>
 
    <div class="row">
      <div class="col s4">
+      <% if current_user %>
        <a href="trips/London/to_destination"><img class="responsive-img" src="london.png" alt="London"></a>
+      <% else %>
+       <a class = "modal-trigger" href="#modal2" data-target = "#modal2"><img class="responsive-img" src="london.png" alt="London"></a>
+      <% end %>
      </div>
      <div class="col s4">
+      <% if current_user %>
        <a href="trips/San_Francisco/to_destination"><img class="responsive-img" src="sanfrancisco.png" alt="San Francisco"></a>
+      <% else %>
+       <a class = "modal-trigger" href="#modal2" data-target = "#modal2"><img class="responsive-img" src="sanfrancisco.png" alt="San Francisco"></a>
+      <% end %>
      </div>
      <div class="col s4">
+      <% if current_user %>
        <a href="trips/Seoul/to_destination"><img class="responsive-img" src="seoul.png" alt="Seoul"></a>
+      <% else %>
+       <a class = "modal-trigger" href="#modal2" data-target = "#modal2"><img class="responsive-img" src="seoul.png" alt="Seoul"></a>
+      <% end %>
      </div>
    </div>
 </div>
